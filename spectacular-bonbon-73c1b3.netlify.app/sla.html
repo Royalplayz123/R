@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/gJQZ9J5K/Chat-GPT-Image-Jan-11-2026-09-20-12-PM.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Level Agreement | Galaxy Host</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES (Same as Home Page) --- */
+        :root {
+            --bg-dark: #0a0b1e;
+            --bg-card: #161936;
+            --primary-purple: #7000ff;
+            --primary-pink: #ff0055;
+            --primary-blue: #00d2ff;
+            --primary-green: #22c55e;
+            --primary-red: #ef4444;
+            
+            --text-white: #ffffff;
+            --text-gray: #aab2cd;
+
+            --gradient-main: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+            --gradient-hover: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+
+            --border-color: rgba(255, 255, 255, 0.1);
+            --glow: 0 0 20px rgba(112, 0, 255, 0.4);
+
+            /* Mobile Menu Variables */
+            --mobile-menu-bg: #0f1129;
+            --mobile-border-color: rgba(255,255,255,0.05);
+        }
+
+        /* --- LIGHT MODE VARIABLES --- */
+        body.light-mode {
+            --bg-dark: #f0f2f5;
+            --bg-card: #ffffff;
+            --text-white: #1a202c;
+            --text-gray: #64748b;
+
+            --border-color: rgba(0, 0, 0, 0.1);
+            --glow: 0 0 20px rgba(112, 0, 255, 0.2);
+            --mobile-menu-bg: #ffffff;
+        }
+
+        /* --- RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Outfit', sans-serif; background-color: var(--bg-dark); color: var(--text-white); line-height: 1.6; overflow-x: hidden; transition: background-color 0.3s ease, color 0.3s ease; }
+        a { text-decoration: none; color: inherit; transition: 0.3s ease; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- HEADER (Same as Home Page) --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            padding: 20px 0; 
+            background: rgba(10, 11, 30, 0.7); /* Glassmorphism */
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.3s ease, border 0.3s ease;
+        }
+        body.light-mode header { background: rgba(255, 255, 255, 0.9); }
+
+        .nav-container { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; position: relative; }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.5rem; letter-spacing: 1px; z-index: 1003; color: var(--text-white); }
+        .logo img { height: 45px; width: 45px; object-fit: cover; border-radius: 50%; border: 2px solid var(--primary-purple); box-shadow: 0 0 15px rgba(112, 0, 255, 0.3); }
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+
+        /* --- NAVIGATION DROPDOWN (DESKTOP) --- */
+        .nav-item { position: relative; cursor: pointer; }
+        .dropdown-menu {
+            display: none; 
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-card);
+            min-width: 220px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 10px 0;
+            flex-direction: column;
+            z-index: 1004;
+        }
+
+        @media (min-width: 993px) {
+            .nav-item:hover .dropdown-menu { display: flex; animation: slideDown 0.2s ease; }
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-menu a {
+            padding: 12px 16px;
+            color: var(--text-gray);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.9rem;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        .dropdown-menu a:hover { color: var(--primary-purple); background: rgba(112, 0, 255, 0.1); padding-left: 20px; }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            position: relative;
+            cursor: pointer;
+            padding: 8px 0;
+        }
+        .nav-links a:hover { color: var(--primary-purple); }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
+            background: var(--gradient-main); transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .header-actions { display: flex; align-items: center; gap: 15px; }
+
+        /* --- THEME SWITCH BUTTON --- */
+        .theme-switcher { position: relative; z-index: 1003; }
+        .theme-btn {
+            background: rgba(255, 255, 255, 0.05); color: var(--text-white); border: 1px solid var(--border-color);
+            width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: 0.3s;
+        }
+        .theme-btn:hover { background: var(--primary-purple); color: white; }
+        body.light-mode .theme-btn { background: #e2e8f0; color: var(--text-white); }
+
+        /* --- BUTTONS --- */
+        .btn { padding: 12px 28px; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; cursor: pointer; border: none; display: inline-block; }
+        .btn-primary { background: var(--gradient-main); color: white; box-shadow: 0 4px 15px rgba(255, 0, 85, 0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 0, 85, 0.5); }
+
+        /* --- MOBILE MENU BUTTON --- */
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-white); font-size: 1.5rem; cursor: pointer; z-index: 1003; padding: 5px; outline: none; }
+
+        /* --- MOBILE MENU STYLES (SAME AS HOME PAGE) --- */
+        @media (max-width: 992px) {
+            .mobile-menu-btn { display: block; }
+            .header-actions .btn-primary { display: none; }
+
+            .nav-links {
+                position: fixed; top: 0; right: -100%; width: 80%; max-width: 350px; height: 100vh;
+                background: var(--mobile-menu-bg); flex-direction: column; justify-content: flex-start;
+                padding-top: 100px; padding-left: 30px; border-left: 1px solid var(--border-color);
+                box-shadow: -5px 0 30px rgba(0,0,0,0.5); transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+                z-index: 1002; overflow-y: auto; align-items: flex-start;
+            }
+
+            body.nav-open .nav-links { right: 0; }
+
+            body.nav-open::after {
+                content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.6); z-index: 1001; backdrop-filter: blur(px); pointer-events: none;
+            }
+
+            .nav-links li { width: 100%; margin-bottom: 20px; }
+            .nav-links a { font-size: 1.1rem; display: block; padding: 10px 0; color: var(--text-white); }
+            .nav-links a::after { display: none; }
+
+            .nav-item .dropdown-menu {
+                display: none; position: static; width: 100%; background: rgba(255,255,255,0.03);
+                box-shadow: none; border: none; border-left: 2px solid var(--primary-purple);
+                margin-left: 10px; padding-left: 0; min-width: auto;
+            }
+            body.light-mode .nav-item .dropdown-menu { background: rgba(0,0,0,0.03); }
+            .nav-item.active .dropdown-menu { display: flex; animation: slideDown 0.3s ease; }
+
+            .mobile-cta-wrapper { display: block !important; margin-top: 20px; width: 90%; }
+        }
+
+        /* --- PAGE SPECIFIC STYLES --- */
+        /* --- HERO --- */
+        .hero { padding: 140px 0 80px; text-align: center; background: radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.1) 0%, var(--bg-dark) 70%); overflow: hidden; }
+        .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; color: var(--text-white); }
+        .hero p { font-size: 1.1rem; color: var(--text-gray); max-width: 700px; margin: 0 auto; }
+
+        /* --- DASHBOARD STATS --- */
+        .stats-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1000px; margin: 40px auto 0; padding: 0 20px; }
+        .stat-card { background: var(--bg-card); border: 1px solid var(--border-color); padding: 30px; border-radius: 16px; text-align: center; position: relative; overflow: hidden; transition: 0.3s; }
+        .stat-card:hover { border-color: var(--primary-purple); transform: translateY(-5px); }
+        .stat-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--primary-purple); opacity: 0.5; }
+        .stat-value { font-size: 2.5rem; font-weight: 800; color: var(--text-white); display: block; margin-bottom: 5px; }
+        .stat-label { font-size: 1rem; color: var(--text-gray); font-weight: 500; }
+        .stat-icon { margin-top: 15px; font-size: 2rem; color: var(--primary-green); }
+
+        /* --- DOCUMENT CONTAINER --- */
+        .sla-container { display: grid; grid-template-columns: 300px 1fr; max-width: 1300px; margin: 0 auto; padding: 0 20px 80px; align-items: start; }
+        
+        /* --- SIDEBAR --- */
+        .sidebar { background: var(--bg-card); border-right: 1px solid var(--border-color); height: 100vh; position: sticky; top: 0; padding: 100px 20px; display: flex; flex-direction: column; gap: 10px; }
+        .sidebar h2 { font-size: 1.1rem; color: var(--text-gray); margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
+        .sidebar-links li { margin-bottom: 5px; }
+        .sidebar-links a {
+            display: block; padding: 15px; border-radius: 8px; background: rgba(255,255,255,0.05);
+            color: var(--text-white); font-weight: 500; border: 1px solid transparent; transition: 0.2s;
+        }
+        .sidebar-links a:hover, .sidebar-links a.active { background: rgba(112, 0, 255, 0.1); border-color: var(--primary-purple); color: var(--primary-purple); padding-left: 20px; }
+        .sidebar-links a i { margin-right: 10px; width: 20px; text-align: center; }
+        .sidebar-links a.active i { color: var(--primary-purple); }
+
+        /* --- CONTENT AREA --- */
+        .content { padding: 80px; scroll-margin-top: 80px; }
+        .section-block { margin-bottom: 60px; border-bottom: 1px solid var(--border-color); padding-bottom: 40px; }
+        .section-block:last-child { border-bottom: none; }
+        
+        .section-title { font-size: 2rem; font-weight: 700; color: var(--text-white); margin-bottom: 25px; display: flex; align-items: center; gap: 15px; }
+        .section-title i { color: var(--primary-pink); font-size: 1.5rem; }
+        .section-desc { color: var(--text-gray); margin-bottom: 30px; font-size: 1.1rem; max-width: 900px; line-height: 1.6; }
+
+        /* --- TABLE --- */
+        .sla-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background: var(--bg-card); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); }
+        .sla-table th, .sla-table td { padding: 20px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .sla-table th { background: rgba(0, 0, 0, 0.2); color: var(--text-white); font-weight: 600; font-size: 0.95rem; text-transform: uppercase; width: 25%; }
+        .sla-table tr:last-child td { border-bottom: none; }
+        .sla-table td strong { color: var(--text-white); display: block; margin-bottom: 4px; font-size: 1.1rem; }
+        .sla-table td span { font-size: 0.95rem; color: var(--text-gray); display: block; }
+        /* Make Service column wider */
+        .sla-table tr td:first-child { width: 40%; }
+
+        /* --- CREDIT CARDS --- */
+        .credit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px; }
+        .credit-card {
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border-color);
+            padding: 30px; border-radius: 12px; text-align: center; transition: 0.3s;
+        }
+        .credit-card:hover { border-color: var(--primary-blue); background: rgba(0, 210, 255, 0.05); transform: translateY(-5px); }
+        .credit-title { font-size: 1.2rem; font-weight: 700; color: var(--text-white); margin-bottom: 10px; }
+        .credit-desc { font-size: 0.95rem; color: var(--text-gray); margin-bottom: 10px; }
+        .credit-amount { font-size: 1.8rem; font-weight: 800; color: var(--primary-purple); margin-top: 10px; display: block; }
+
+        /* --- EXCLUSION BOX --- */
+        .exclusion-box { background: rgba(239, 68, 68, 0.1); border-left: 4px solid var(--primary-red); padding: 25px; border-radius: 8px; margin: 40px 0; }
+        .exclusion-box h3 { color: var(--primary-red); font-size: 1.2rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .exclusion-box ul { list-style: square; padding-left: 20px; color: var(--text-gray); }
+        .exclusion-box ul li { margin-bottom: 10px; font-size: 0.95rem; }
+
+        /* --- FOOTER --- */
+        footer { background: #050611; padding: 60px 20px 30px; border-top: 1px solid var(--border-color); text-align: center; }
+        footer p { font-size: 0.85rem; color: var(--text-gray); margin-bottom: 10px; }
+        .footer-socials a { margin: 0 10px; color: var(--text-white); font-size: 1.2rem; }
+        .footer-socials a:hover { color: var(--primary-purple); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .sla-container { grid-template-columns: 1fr; }
+            .sidebar { position: relative; top: 0; height: auto; padding: 30px 20px; border-right: none; border-bottom: 1px solid var(--border-color); }
+            .sidebar h2 { display: none; }
+            .sidebar-links { display: flex; gap: 10px; width: 100%; justify-content: center; flex-wrap: wrap; }
+            .sidebar-links a { padding: 10px 20px; font-size: 0.85rem; }
+            .content { padding: 40px 20px; }
+            .stats-dashboard { grid-template-columns: 1fr; gap: 15px; }
+            .hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header (Same as Home Page) -->
+    <header>
+        <div class="nav-container">
+            <a class='logo' href='index.html'>
+                <img src="https://i.postimg.cc/RV3RYXH4/6b15ab0ec7a07901363f381f11254741.webp" alt="Galaxy Host Logo">
+                GALAXY HOST
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobile-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href='index.html#home' onclick='closeMenu()'>Home</a></li>
+                    
+                    <li class="nav-item" onclick="toggleDropdown(this)">
+                        <a href="javascript:void(0)">
+                            Games & Services 
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href='minecraft.html' onclick='closeMenu()'>Minecraft Plans</a>
+                            <a href='vps.html' onclick='closeMenu()'>VPS Plans</a>
+                            <a href='amd_vps.html' onclick='closeMenu()'>AMD VPS Plans</a>
+                            <a href='bot_host.html' onclick='closeMenu()'>Bot Hosting</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item" onclick="toggleDropdown(this)">
+                        <a href="javascript:void(0)">
+                            Terms and Policy 
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href='about_us.html' onclick='closeMenu()'>About Us</a>
+                            <a href='legal_policy.html' onclick='closeMenu()'>Legal Policies</a>
+                            <a href='contact.html' onclick='closeMenu()'>Contact Us</a>
+                            <a href='index.html#partner' onclick='closeMenu()'>Partner</a>
+                            <a href='payment.html' onclick='closeMenu()'>Payment</a>
+                            <a href='index.html#blogs' onclick='closeMenu()'>Blogs</a>
+                        </div>
+                    </li>
+
+                    <li><a href='network.html' onclick='closeMenu()'>Network</a></li>
+                    <li><a href='contact.html' onclick='closeMenu()'>Support</a></li>
+                    
+                    <!-- Mobile Only CTA -->
+                    <li style="margin-top: 10px; display: none;" class="mobile-cta-wrapper">
+                         <a class='btn btn-primary' href='index.html#services' style='width: 100%; text-align: center;'>Get Started</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="theme-switcher">
+                    <button class="theme-btn" id="theme-toggle" title="Switch Mode">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+                <a class='btn btn-primary desktop-cta' href='index.html#services'>Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Service Level Agreement (SLA)</h1>
+        <p>Guarantees of availability, performance, and compensation credits.</p>
+    </section>
+
+    <!-- Stats Dashboard -->
+    <div class="stats-dashboard">
+        <div class="stat-card">
+            <div class="stat-value">99.99%</div>
+            <div class="stat-label">Network Uptime</div>
+            <div class="stat-icon"><i class="fa-solid fa-check-circle"></i></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">24h</div>
+            <div class="stat-label">Response Time</div>
+            <div class="stat-icon"><i class="fa-solid fa-clock"></i></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">30 Days</div>
+            <div class="stat-label">Billing Cycle</div>
+            <div class="stat-icon"><i class="fa-solid fa-calendar"></i></div>
+        </div>
+    </div>
+
+    <!-- Container -->
+    <div class="sla-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <h2>Contents</h2>
+            <ul class="sidebar-links">
+                <li><a href="sla.html#guarantee" class="active"><i class="fa-solid fa-check-double"></i> Uptime Guarantee</a></li>
+                <li><a href="sla.html#compensation"><i class="fa-solid fa-coins"></i> Compensation</a></li>
+                <li><a href="sla.html#exclusions"><i class="fa-solid fa-triangle-exclamation"></i> Exclusions</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            
+            <!-- 1. Uptime Guarantee -->
+            <div id="guarantee" class="section-block">
+                <h2 class="section-title">1. Uptime Guarantee <i class="fa-solid fa-check-double"></i></h2>
+                <p class="section-desc">We are committed to maintaining a highly available infrastructure for your services.</p>
+                
+                <div class="sla-table">
+                    <table>
+                        <tr>
+                            <th>Service</th>
+                            <th>Guaranteed Uptime</th>
+                            <th>Measurement Period</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Network Connectivity</strong> <span>Internet & Backbone</span></td>
+                            <td>99.99%</td>
+                            <td>Monthly</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Infrastructure</strong> <span>Server Hardware (Power/Network)</span></td>
+                            <td>99.90%</td>
+                            <td>Monthly</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Control Panel</strong> <span>Pterodactyl / Client Area</span></td>
+                            <td>99.95%</td>
+                            <td>Monthly</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p style="margin-top: 30px; font-size: 0.95rem; color: var(--text-gray);">
+                    Galaxy Host calculates uptime based on external, independent monitoring services (e.g., StatusCake, UptimeRobot). We maintain active internal monitoring to ensure issues are resolved as quickly as possible.
+                </p>
+            </div>
+
+            <!-- 2. Compensation Credits -->
+            <div id="compensation" class="section-block">
+                <h2 class="section-title">2. Service Compensation <i class="fa-solid fa-coins"></i></h2>
+                <p class="section-desc">In the unlikely event we fail to meet our SLA, you are entitled to service credits.</p>
+                
+                <div class="credit-grid">
+                    <div class="credit-card">
+                        <div class="credit-title">Minor Outage</div>
+                        <div class="credit-desc">< 1 hour downtime</div>
+                        <div class="credit-amount">5% Credit</div>
+                    </div>
+                    <div class="credit-card">
+                        <div class="credit-title">Major Outage</div>
+                        <div class="credit-desc">> 4 hours downtime</div>
+                        <div class="credit-amount">10% Credit</div>
+                    </div>
+                    <div class="credit-card">
+                        <div class="credit-title">Critical Outage</div>
+                        <div class="credit-desc">> 24 hours downtime</div>
+                        <div class="credit-amount">25% Credit</div>
+                    </div>
+                    <div class="credit-card">
+                        <div class="credit-title">Full Day Downtime</div>
+                        <div class="credit-desc">> 48 hours downtime</div>
+                        <div class="credit-amount">100% Credit</div>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 30px; font-size: 0.95rem; color: var(--text-gray);">
+                    <strong>How Credits Work:</strong> Compensation is applied as account credit for future billing cycles. It is not a cash refund. Credits are calculated based on the percentage of time the service was unavailable relative to the guarantee period.
+                </p>
+            </div>
+
+            <!-- 3. Exclusions -->
+            <div id="exclusions" class="section-block">
+                <h2 class="section-title">3. Exclusions <i class="fa-solid fa-triangle-exclamation"></i></h2>
+                <p class="section-desc">Scenarios where Galaxy Host is not liable for downtime.</p>
+                
+                <div class="exclusion-box">
+                    <h3><i class="fa-solid fa-ban"></i> No Compensation For:</h3>
+                    <ul>
+                        <li><strong>Scheduled Maintenance:</strong> Planned maintenance windows (up to 2 hours) with 48-hour notice are not subject to compensation credits.</li>
+                        <li><strong>Third-Party Failures:</strong> Outages caused by upstream providers, internet exchange points, or regional power grid failures outside our control.</li>
+                        <li><strong>User Configuration Error:</strong> Downtime caused by user errors, scripts, or firewall misconfiguration.</li>
+                        <li><strong>Abuse or TOS Violation:</strong> If service is suspended due to a violation of our Acceptable Use Policy, no compensation will be issued.</li>
+                        <li><strong>Force Majeure:</strong> Acts of God, war, terrorism, or natural disasters affecting our data centers.</li>
+                        <li><strong>DDoS Attacks:</strong> While we mitigate attacks, significant volumetric attacks may degrade performance or cause temporary packet loss, which does not qualify for infrastructure downtime compensation.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>We strive for perfection and value your uptime.</p>
+            <p>Last Updated: October 26, 2023</p>
+            <div class="footer-socials">
+                <a href="https://discord.gg/7ZZywPtdYt"><i class="fa-brands fa-discord"></i></a>
+                <a href='maintaince.html'><i class="fa-brands fa-twitter"></i></a>
+                <a href='maintaince.html'><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // --- MOBILE MENU LOGIC (Same as Home Page) ---
+        const mobileBtn = document.getElementById('mobile-toggle');
+        const body = document.body;
+        const navLinks = document.querySelector('.nav-links');
+
+        // Toggle menu open/close
+        mobileBtn.addEventListener('click', () => {
+            body.classList.toggle('nav-open');
+            
+            // Switch icon
+            const icon = mobileBtn.querySelector('i');
+            if (body.classList.contains('nav-open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close menu when clicking a link
+        function closeMenu() {
+            if (window.innerWidth <= 992) {
+                body.classList.remove('nav-open');
+                const icon = mobileBtn.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        // Mobile Dropdown Toggle
+        function toggleDropdown(element) {
+            if (window.innerWidth <= 992) {
+                element.classList.toggle('active');
+            }
+        }
+
+        // --- THEME SWITCH LOGIC ---
+        const themeBtn = document.getElementById('theme-toggle');
+        const themeIcon = themeBtn.querySelector('i');
+
+        themeBtn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Initialize Theme on Load
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+
+        // --- SCROLL SPY ---
+        const sections = document.querySelectorAll('.section-block');
+        const navLinksSidebar = document.querySelectorAll('.sidebar-links a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinksSidebar.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Mobile CTA Check
+        function checkMobileCta() {
+            const mobileCta = document.querySelector('.mobile-cta-wrapper');
+            const desktopCta = document.querySelector('.desktop-cta');
+            
+            if (window.innerWidth <= 992) {
+                mobileCta.style.display = 'block';
+                desktopCta.style.display = 'none';
+            } else {
+                mobileCta.style.display = 'none';
+                desktopCta.style.display = 'inline-block';
+            }
+        }
+        
+        window.addEventListener('resize', checkMobileCta);
+        checkMobileCta(); 
+    </script>
+</body>
+</html>

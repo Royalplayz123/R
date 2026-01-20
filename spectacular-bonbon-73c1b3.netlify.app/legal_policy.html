@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/gJQZ9J5K/Chat-GPT-Image-Jan-11-2026-09-20-12-PM.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Policies | Galaxy Host</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES (Same as Home Page) --- */
+        :root {
+            --bg-dark: #0a0b1e;
+            --bg-card: #161936;
+            --primary-purple: #7000ff;
+            --primary-pink: #ff0055;
+            --primary-blue: #00d2ff;
+            
+            --text-white: #ffffff;
+            --text-gray: #aab2cd;
+
+            --gradient-main: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+            --gradient-hover: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+
+            --border-color: rgba(255, 255, 255, 0.1);
+            --glow: 0 0 20px rgba(112, 0, 255, 0.4);
+
+            /* Mobile Menu Variables */
+            --mobile-menu-bg: #0f1129;
+            --mobile-border-color: rgba(255,255,255,0.05);
+        }
+
+        /* --- LIGHT MODE VARIABLES --- */
+        body.light-mode {
+            --bg-dark: #f0f2f5;
+            --bg-card: #ffffff;
+            --primary-purple: #7000ff;
+            --primary-pink: #ff0055;
+            --primary-blue: #0066ff;
+            
+            --text-white: #1a202c;
+            --text-gray: #64748b;
+
+            --border-color: rgba(0, 0, 0, 0.1);
+            --glow: 0 0 20px rgba(112, 0, 255, 0.2);
+            --mobile-menu-bg: #ffffff;
+        }
+
+        /* --- RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Outfit', sans-serif; background-color: var(--bg-dark); color: var(--text-white); line-height: 1.6; overflow-x: hidden; transition: background-color 0.3s ease, color 0.3s ease; }
+        a { text-decoration: none; color: inherit; transition: 0.3s ease; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- HEADER (Same as Home) --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            padding: 20px 0; 
+            background: rgba(10, 11, 30, 0.7); /* Glassmorphism */
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.3s ease, border 0.3s ease;
+        }
+        body.light-mode header { background: rgba(255, 255, 255, 0.9); }
+
+        .nav-container { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; position: relative; }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.5rem; letter-spacing: 1px; z-index: 1003; color: var(--text-white); }
+        .logo img { height: 45px; width: 45px; object-fit: cover; border-radius: 50%; border: 2px solid var(--primary-purple); box-shadow: 0 0 15px rgba(112, 0, 255, 0.3); }
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+
+        /* --- NAVIGATION DROPDOWN (DESKTOP) --- */
+        .nav-item { position: relative; cursor: pointer; }
+        .dropdown-menu {
+            display: none; 
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-card);
+            min-width: 220px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 10px 0;
+            flex-direction: column;
+            z-index: 1004;
+        }
+
+        @media (min-width: 993px) {
+            .nav-item:hover .dropdown-menu { display: flex; animation: slideDown 0.2s ease; }
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-menu a {
+            padding: 12px 16px;
+            color: var(--text-gray);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.9rem;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        .dropdown-menu a:hover { color: var(--primary-purple); background: rgba(112, 0, 255, 0.1); padding-left: 20px; }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            position: relative;
+            cursor: pointer;
+            padding: 8px 0;
+        }
+        .nav-links a:hover { color: var(--primary-purple); }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
+            background: var(--gradient-main); transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .header-actions { display: flex; align-items: center; gap: 15px; }
+
+        /* --- THEME SWITCH BUTTON --- */
+        .theme-switcher { position: relative; z-index: 1003; }
+        .theme-btn {
+            background: rgba(255, 255, 255, 0.05); color: var(--text-white); border: 1px solid var(--border-color);
+            width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: 0.3s;
+        }
+        .theme-btn:hover { background: var(--primary-purple); color: white; }
+        body.light-mode .theme-btn { background: #e2e8f0; color: var(--text-white); }
+
+        /* --- BUTTONS --- */
+        .btn { padding: 12px 28px; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; cursor: pointer; border: none; display: inline-block; }
+        .btn-primary { background: var(--gradient-main); color: white; box-shadow: 0 4px 15px rgba(255, 0, 85, 0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 0, 85, 0.5); }
+
+        /* --- MOBILE MENU BUTTON --- */
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-white); font-size: 1.5rem; cursor: pointer; z-index: 1003; padding: 5px; outline: none; }
+
+        /* --- MOBILE MENU STYLES (SAME AS HOME PAGE) --- */
+        @media (max-width: 992px) {
+            .mobile-menu-btn { display: block; }
+            .header-actions .btn-primary { display: none; }
+
+            .nav-links {
+                position: fixed; top: 0; right: -100%; width: 80%; max-width: 350px; height: 100vh;
+                background: var(--mobile-menu-bg); flex-direction: column; justify-content: flex-start;
+                padding-top: 100px; padding-left: 30px; border-left: 1px solid var(--border-color);
+                box-shadow: -5px 0 30px rgba(0,0,0,0.5); transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+                z-index: 1002; overflow-y: auto; align-items: flex-start;
+            }
+
+            body.nav-open .nav-links { right: 0; }
+
+            body.nav-open::after {
+                content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.6); z-index: 1001; backdrop-filter: blur(px); pointer-events: none;
+            }
+
+            .nav-links li { width: 100%; margin-bottom: 20px; }
+            .nav-links a { font-size: 1.1rem; display: block; padding: 10px 0; color: var(--text-white); }
+            .nav-links a::after { display: none; }
+
+            .nav-item .dropdown-menu {
+                display: none; position: static; width: 100%; background: rgba(255,255,255,0.03);
+                box-shadow: none; border: none; border-left: 2px solid var(--primary-purple);
+                margin-left: 10px; padding-left: 0; min-width: auto;
+            }
+            body.light-mode .nav-item .dropdown-menu { background: rgba(0,0,0,0.03); }
+            .nav-item.active .dropdown-menu { display: flex; animation: slideDown 0.3s ease; }
+
+            .mobile-cta-wrapper { display: block !important; margin-top: 20px; width: 90%; }
+        }
+
+        /* --- PAGE SPECIFIC STYLES (HERO & GRID) --- */
+        .hero {
+            padding: 160px 0 100px; 
+            position: relative; 
+            overflow: hidden; 
+            text-align: center; 
+            background: radial-gradient(circle at 50% 50%, rgba(112,0,255,0.1) 0%, var(--bg-dark) 70%);
+        }
+        .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 20px; background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 1.1rem; color: var(--text-gray); max-width: 600px; margin: 0 auto; }
+
+        /* --- FADE ANIMATION --- */
+        .fade-in-up { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* --- LEGAL GRID --- */
+        .legal-section { padding: 50px 20px 100px; max-width: 1300px; margin: 0 auto; }
+        .legal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+
+        /* --- POLICY CARD --- */
+        .policy-card {
+            background: var(--bg-card); 
+            border: 1px solid var(--border-color);
+            border-radius: 20px; 
+            padding: 40px 30px; 
+            position: relative; 
+            overflow: hidden; 
+            display: flex; 
+            flex-direction: column; 
+            transition: all 0.3s ease;
+        }
+
+        .policy-card.important {
+            border-color: var(--primary-pink);
+        }
+
+        .policy-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-purple);
+            box-shadow: var(--glow);
+        }
+
+        .policy-header { text-align: center; margin-bottom: 25px; }
+        .policy-icon {
+            width: 70px; height: 70px; background: rgba(112, 0, 255, 0.1); 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            margin: 0 auto 20px; font-size: 2rem; color: var(--text-white); transition: 0.3s;
+        }
+        .policy-card:hover .policy-icon { background: var(--gradient-main); transform: scale(1.1); }
+
+        .policy-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 15px; color: var(--text-white); }
+        .policy-desc {
+            color: var(--text-gray); margin-bottom: 25px; font-size: 0.95rem; 
+            line-height: 1.5; flex-grow: 1; text-align: center;
+        }
+
+        .policy-btn {
+            margin-top: auto; width: 100%; padding: 15px; 
+            background: transparent; border: 2px solid var(--primary-purple); 
+            color: var(--text-white); border-radius: 10px; font-weight: 700; font-size: 1rem; 
+            cursor: pointer; transition: 0.3s; text-align: center; display: block;
+        }
+
+        .policy-card:hover .policy-btn { background: var(--gradient-main); border-color: transparent; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #050611;
+            border-top: 1px solid var(--border-color);
+            padding: 80px 20px 30px;
+        }
+        body.light-mode footer { background: #eef2f6; }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1300px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-col { display: flex; flex-direction: column; }
+        .footer-col.logo-wrapper { align-items: flex-start; }
+        .footer-col.logo-wrapper .logo { margin-bottom: 15px; }
+        .footer-col p { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 20px; max-width: 300px; }
+        
+        .social-links { display: flex; gap: 15px; }
+        .social-links a {
+            width: 36px; height: 36px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center; color: var(--text-white); transition: 0.3s;
+        }
+        .social-links a:hover { background: var(--primary-purple); color: white; transform: translateY(-3px); }
+
+        .footer-col h4 { color: var(--text-white); margin-bottom: 25px; font-size: 1.1rem; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: var(--text-gray); font-size: 0.95rem; }
+        .footer-col ul li a:hover { color: var(--primary-blue); padding-left: 5px; }
+
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 2.2rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+            .footer-col.logo-wrapper { align-items: center; }
+            .social-links { justify-content: center; }
+            .footer-col p { margin: 0 auto 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header (Structure matches Home Page) -->
+    <header>
+        <div class="nav-container">
+            <a class='logo' href='index.html'>
+                <img src="https://i.postimg.cc/RV3RYXH4/6b15ab0ec7a07901363f381f11254741.webp" alt="Galaxy Host Logo">
+                GALAXY HOST
+            </a>
+            
+            <!-- Mobile Menu Button (Three Lines) -->
+            <button class="mobile-menu-btn" id="mobile-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href='index.html#home' onclick='closeMenu()'>Home</a></li>
+                    
+                    <li class="nav-item" onclick="toggleDropdown(this)">
+                        <a href="javascript:void(0)">
+                            Games & Services 
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href='minecraft.html' onclick='closeMenu()'>Minecraft Plans</a>
+                            <a href='vps.html' onclick='closeMenu()'>VPS Plans</a>
+                            <a href='amd_vps.html' onclick='closeMenu()'>AMD VPS Plans</a>
+                            <a href='bot_host.html' onclick='closeMenu()'>Bot Hosting</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item" onclick="toggleDropdown(this)">
+                        <a href="javascript:void(0)">
+                            Terms and Policy 
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href='about_us.html' onclick='closeMenu()'>About Us</a>
+                            <a href='legal_policy.html' onclick='closeMenu()'>Legal Policies</a>
+                            <a href='contact.html' onclick='closeMenu()'>Contact Us</a>
+                            <a href='index.html#partner' onclick='closeMenu()'>Partner</a>
+                            <a href='payment.html' onclick='closeMenu()'>Payment</a>
+                            <a href='index.html#blogs' onclick='closeMenu()'>Blogs</a>
+                        </div>
+                    </li>
+
+                    <li><a href='network.html' onclick='closeMenu()'>Network</a></li>
+                    <li><a href='contact.html' onclick='closeMenu()'>Support</a></li>
+                    
+                    <!-- Mobile Only CTA -->
+                    <li style="margin-top: 10px; display: none;" class="mobile-cta-wrapper">
+                         <a class='btn btn-primary' href='index.html#services' style='width: 100%; text-align: center;'>Get Started</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="theme-switcher">
+                    <button class="theme-btn" id="theme-toggle" title="Switch Mode">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+                <a class='btn btn-primary desktop-cta' href='index.html#services'>Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content fade-in-up">
+            <h1>Legal Policies</h1>
+            <p>Please review our terms and conditions before using our services. These documents protect both you and Galaxy Host.</p>
+        </div>
+    </section>
+
+    <!-- Legal Grid -->
+    <section class="legal-section">
+        <div class="legal-grid fade-in-up">
+            
+            <div class="policy-card">
+                <div class="policy-header">
+                    <div class="policy-icon"><i class="fa-solid fa-file-contract"></i></div>
+                    <h3 class="policy-title">Terms of Service</h3>
+                </div>
+                <p class="policy-desc">The agreement between Galaxy Host and you governing our use of services, data rights, and user obligations.</p>
+                <a class='policy-btn' href='tos.html'>View ToS</a>
+            </div>
+
+            <div class="policy-card">
+                <div class="policy-header">
+                    <div class="policy-icon"><i class="fa-solid fa-user-shield"></i></div>
+                    <h3 class="policy-title">Privacy Policy</h3>
+                </div>
+                <p class="policy-desc">We value your privacy. Learn how we collect, use, and protect your personal data and server logs.</p>
+                <a class='policy-btn' href='pp.html'>View Policy</a>
+            </div>
+
+            <div class="policy-card important">
+                <div class="policy-header">
+                    <div class="policy-icon"><i class="fa-solid fa-rotate-left"></i></div>
+                    <h3 class="policy-title">Refund Policy</h3>
+                </div>
+                <p class="policy-desc">Detailed explanation of our refund window, eligibility criteria, and exceptions. Please read carefully before purchasing.</p>
+                <a class='policy-btn' href='refund_policy.html'>View Policy</a>
+            </div>
+
+            <div class="policy-card important">
+                <div class="policy-header">
+                    <div class="policy-icon"><i class="fa-solid fa-ban"></i></div>
+                    <h3 class="policy-title">Acceptable Use</h3>
+                </div>
+                <p class="policy-desc">Defines allowed and prohibited activities. No illegal content, resource abuse, or malicious scripts.</p>
+                <a class='policy-btn' href='acceptable_use.html'>View AUP</a>
+            </div>
+
+            <div class="policy-card">
+                <div class="policy-header">
+                    <div class="policy-icon"><i class="fa-solid fa-server"></i></div>
+                    <h3 class="policy-title">Service Level (SLA)</h3>
+                </div>
+                <p class="policy-desc">Guarantees regarding network uptime, hardware availability, and compensation credits in case of failure.</p>
+                <a class='policy-btn' href='sla.html'>View SLA</a>
+            </div>
+
+            <div class="policy-card">
+                <div class="policy-header">
+                    <div class="policy-icon"><i class="fa-solid fa-cookie"></i></div>
+                    <h3 class="policy-title">Cookie Policy</h3>
+                </div>
+                <p class="policy-desc">How we use cookies on our website to improve user experience and functionality.</p>
+                <a class='policy-btn' href='cookie.html'>View Cookies</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col logo-wrapper">
+                <a class='logo' href='index.html'>
+                    <img src="https://i.postimg.cc/RV3RYXH4/6b15ab0ec7a07901363f381f11254741.webp" alt="">
+                    GALAXY HOST
+                </a>
+                <p>Empowering developers and gamers with high-performance infrastructure since 2025.</p>
+                <div class="social-links">
+                    <a href="https://discord.gg/7ZZywPtdYt"><i class="fa-brands fa-discord"></i></a>
+                    <a href='maintaince.html'><i class="fa-brands fa-twitter"></i></a>
+                    <a href='maintaince.html'><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href='minecraft.html'>Minecraft Hosting</a></li>
+                    <li><a href='vps.html'>VPS Hosting</a></li>
+                    <li><a href='contact.html'>Web Hosting</a></li>
+                    <li><a href='amd_vps.html'>AMD VPS</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href='network.html'>Knowledgebase</a></li>
+                    <li><a href="legal_policy.html#">Billing Portal</a></li>
+                    <li><a href='network.html'>Network Status</a></li>
+                    <li><a href="https://discord.gg/7ZZywPtdYt">Discord Support</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href='about_us.html'>About Us</a></li>
+                    <li><a href='pp.html'>Privacy Policy</a></li>
+                    <li><a href='tos.html'>Terms of Service</a></li>
+                    <li><a href='contact.html'>Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="text-align: center; border-top: 1px solid var(--border-color); padding-top: 30px; font-size: 0.85rem; color: var(--text-gray);">
+            &copy; 2026 Galaxy Hosting Solutions. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // --- MOBILE MENU LOGIC (Same as Home Page) ---
+        const mobileBtn = document.getElementById('mobile-toggle');
+        const body = document.body;
+        const navLinks = document.querySelector('.nav-links');
+
+        // Toggle menu open/close
+        mobileBtn.addEventListener('click', () => {
+            body.classList.toggle('nav-open');
+            
+            // Switch icon
+            const icon = mobileBtn.querySelector('i');
+            if (body.classList.contains('nav-open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close menu when clicking a link
+        function closeMenu() {
+            if (window.innerWidth <= 992) {
+                body.classList.remove('nav-open');
+                const icon = mobileBtn.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        // Mobile Dropdown Toggle
+        function toggleDropdown(element) {
+            if (window.innerWidth <= 992) {
+                element.classList.toggle('active');
+            }
+        }
+
+        // --- THEME SWITCH LOGIC ---
+        const themeBtn = document.getElementById('theme-toggle');
+        const themeIcon = themeBtn.querySelector('i');
+
+        themeBtn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // --- SCROLL REVEAL LOGIC ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+        // Mobile CTA Check
+        function checkMobileCta() {
+            const mobileCta = document.querySelector('.mobile-cta-wrapper');
+            const desktopCta = document.querySelector('.desktop-cta');
+            
+            if (window.innerWidth <= 992) {
+                mobileCta.style.display = 'block';
+                desktopCta.style.display = 'none';
+            } else {
+                mobileCta.style.display = 'none';
+                desktopCta.style.display = 'inline-block';
+            }
+        }
+        
+        window.addEventListener('resize', checkMobileCta);
+        checkMobileCta(); 
+    </script>
+</body>
+</html>

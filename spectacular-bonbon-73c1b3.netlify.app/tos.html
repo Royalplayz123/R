@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/gJQZ9J5K/Chat-GPT-Image-Jan-11-2026-09-20-12-PM.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service | Galaxy Host</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES (Same as Home Page) --- */
+        :root {
+            --bg-dark: #0a0b1e;
+            --bg-card: #161936;
+            --primary-purple: #7000ff;
+            --primary-pink: #ff0055;
+            --primary-blue: #00d2ff;
+            --primary-red: #ef4444;
+            
+            --text-white: #ffffff;
+            --text-gray: #aab2cd;
+
+            --gradient-main: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+            --gradient-hover: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+
+            --border-color: rgba(255, 255, 255, 0.1);
+            --glow: 0 0 20px rgba(112, 0, 255, 0.4);
+
+            /* Mobile Menu Variables */
+            --mobile-menu-bg: #0f1129;
+            --mobile-border-color: rgba(255,255,255,0.05);
+        }
+
+        /* --- LIGHT MODE VARIABLES --- */
+        body.light-mode {
+            --bg-dark: #f0f2f5;
+            --bg-card: #ffffff;
+            --text-white: #1a202c;
+            --text-gray: #64748b;
+
+            --border-color: rgba(0, 0, 0, 0.1);
+            --glow: 0 0 20px rgba(112, 0, 255, 0.2);
+            --mobile-menu-bg: #ffffff;
+        }
+
+        /* --- RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Outfit', sans-serif; background-color: var(--bg-dark); color: var(--text-white); line-height: 1.6; overflow-x: hidden; transition: background-color 0.3s ease, color 0.3s ease; }
+        a { text-decoration: none; color: inherit; transition: 0.3s ease; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- HEADER (Same as Home Page) --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            padding: 20px 0; 
+            background: rgba(10, 11, 30, 0.7); /* Glassmorphism */
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.3s ease, border 0.3s ease;
+        }
+        body.light-mode header { background: rgba(255, 255, 255, 0.9); }
+
+        .nav-container { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; position: relative; }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.5rem; letter-spacing: 1px; z-index: 1003; color: var(--text-white); }
+        .logo img { height: 45px; width: 45px; object-fit: cover; border-radius: 50%; border: 2px solid var(--primary-purple); box-shadow: 0 0 15px rgba(112, 0, 255, 0.3); }
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+
+        /* --- NAVIGATION DROPDOWN (DESKTOP) --- */
+        .nav-item { position: relative; cursor: pointer; }
+        .dropdown-menu {
+            display: none; 
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-card);
+            min-width: 220px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 10px 0;
+            flex-direction: column;
+            z-index: 1004;
+        }
+
+        @media (min-width: 993px) {
+            .nav-item:hover .dropdown-menu { display: flex; animation: slideDown 0.2s ease; }
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-menu a {
+            padding: 12px 16px;
+            color: var(--text-gray);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.9rem;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        .dropdown-menu a:hover { color: var(--primary-purple); background: rgba(112, 0, 255, 0.1); padding-left: 20px; }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            position: relative;
+            cursor: pointer;
+            padding: 8px 0;
+        }
+        .nav-links a:hover { color: var(--primary-purple); }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
+            background: var(--gradient-main); transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .header-actions { display: flex; align-items: center; gap: 15px; }
+
+        /* --- THEME SWITCH BUTTON --- */
+        .theme-switcher { position: relative; z-index: 1003; }
+        .theme-btn {
+            background: rgba(255, 255, 255, 0.05); color: var(--text-white); border: 1px solid var(--border-color);
+            width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: 0.3s;
+        }
+        .theme-btn:hover { background: var(--primary-purple); color: white; }
+        body.light-mode .theme-btn { background: #e2e8f0; color: var(--text-white); }
+
+        /* --- BUTTONS --- */
+        .btn { padding: 12px 28px; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; cursor: pointer; border: none; display: inline-block; }
+        .btn-primary { background: var(--gradient-main); color: white; box-shadow: 0 4px 15px rgba(255, 0, 85, 0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 0, 85, 0.5); }
+
+        /* --- MOBILE MENU BUTTON --- */
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-white); font-size: 1.5rem; cursor: pointer; z-index: 1003; padding: 5px; outline: none; }
+
+        /* --- MOBILE MENU STYLES (SAME AS HOME PAGE) --- */
+        @media (max-width: 992px) {
+            .mobile-menu-btn { display: block; }
+            .header-actions .btn-primary { display: none; }
+
+            .nav-links {
+                position: fixed; top: 0; right: -100%; width: 80%; max-width: 350px; height: 100vh;
+                background: var(--mobile-menu-bg); flex-direction: column; justify-content: flex-start;
+                padding-top: 100px; padding-left: 30px; border-left: 1px solid var(--border-color);
+                box-shadow: -5px 0 30px rgba(0,0,0,0.5); transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+                z-index: 1002; overflow-y: auto; align-items: flex-start;
+            }
+
+            body.nav-open .nav-links { right: 0; }
+
+            body.nav-open::after {
+                content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.6); z-index: 1001; backdrop-filter: blur(px); pointer-events: none;
+            }
+
+            .nav-links li { width: 100%; margin-bottom: 20px; }
+            .nav-links a { font-size: 1.1rem; display: block; padding: 10px 0; color: var(--text-white); }
+            .nav-links a::after { display: none; }
+
+            .nav-item .dropdown-menu {
+                display: none; position: static; width: 100%; background: rgba(255,255,255,0.03);
+                box-shadow: none; border: none; border-left: 2px solid var(--primary-purple);
+                margin-left: 10px; padding-left: 0; min-width: auto;
+            }
+            body.light-mode .nav-item .dropdown-menu { background: rgba(0,0,0,0.03); }
+            .nav-item.active .dropdown-menu { display: flex; animation: slideDown 0.3s ease; }
+
+            .mobile-cta-wrapper { display: block !important; margin-top: 20px; width: 90%; }
+        }
+
+        /* --- PAGE SPECIFIC STYLES --- */
+        /* --- HERO --- */
+        .hero { padding: 140px 0 60px; text-align: center; background: radial-gradient(circle at 50% 50%, rgba(112,0,255,0.15) 0%, var(--bg-dark) 70%); overflow: hidden; }
+        .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; color: var(--text-white); }
+        .hero p { font-size: 1.1rem; color: var(--text-gray); max-width: 700px; margin: 0 auto; }
+
+        /* --- DOCUMENT CONTAINER --- */
+        .tos-container { display: grid; grid-template-columns: 300px 1fr; max-width: 1300px; margin: 0 auto; padding: 0 20px 80px; align-items: start; }
+        
+        /* --- SIDEBAR --- */
+        .sidebar { background: var(--bg-card); border-right: 1px solid var(--border-color); height: 100vh; position: sticky; top: 0; padding: 100px 20px; display: flex; flex-direction: column; gap: 10px; }
+        .sidebar h2 { font-size: 1.1rem; color: var(--text-gray); margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
+        .sidebar-links li { margin-bottom: 5px; }
+        .sidebar-links a {
+            display: block; padding: 15px; border-radius: 8px; background: rgba(255,255,255,0.05);
+            color: var(--text-white); font-weight: 500; border: 1px solid transparent; transition: 0.2s;
+        }
+        .sidebar-links a:hover, .sidebar-links a.active { background: rgba(112, 0, 255, 0.1); border-color: var(--primary-purple); color: var(--primary-purple); padding-left: 20px; }
+        .sidebar-links a i { margin-right: 10px; width: 20px; text-align: center; }
+        .sidebar-links a.active i { color: var(--primary-purple); }
+
+        /* --- CONTENT AREA --- */
+        .content { padding: 80px; scroll-margin-top: 100px; }
+        .section-block { margin-bottom: 60px; border-bottom: 1px solid var(--border-color); padding-bottom: 40px; }
+        .section-block:last-child { border-bottom: none; }
+        
+        .section-title { font-size: 2rem; font-weight: 700; color: var(--text-white); margin-bottom: 25px; display: flex; align-items: center; gap: 15px; }
+        .section-title i { color: var(--primary-pink); font-size: 1.5rem; }
+        .section-desc { color: var(--text-gray); margin-bottom: 30px; font-size: 1rem; line-height: 1.6; }
+
+        /* --- PARAGRAPHS --- */
+        .tos-text p { margin-bottom: 20px; font-size: 0.95rem; color: var(--text-gray); line-height: 1.7; }
+        .tos-text ul { list-style: decimal; padding-left: 25px; margin-bottom: 20px; color: var(--text-gray); line-height: 1.6; }
+        .tos-text ul li { margin-bottom: 10px; }
+        .tos-text strong { color: var(--text-white); font-weight: 700; }
+
+        /* --- WARNING BOX --- */
+        .warning-box {
+            background: rgba(255, 0, 85, 0.05);
+            border-left: 4px solid var(--primary-pink);
+            padding: 20px; border-radius: 8px;
+            margin: 30px 0;
+        }
+        .warning-box h4 { color: var(--primary-pink); font-size: 1.1rem; margin-bottom: 10px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .warning-box p { color: var(--text-white); margin: 0; font-size: 0.95rem; }
+
+        /* --- INFO BOX --- */
+        .info-box {
+            background: rgba(0, 210, 255, 0.05);
+            border-left: 4px solid var(--primary-blue);
+            padding: 20px; border-radius: 8px;
+            margin: 30px 0;
+        }
+        .info-box p { color: var(--text-white); margin: 0; font-size: 0.95rem; }
+        .info-box strong { color: var(--primary-blue); display: block; margin-bottom: 5px; }
+
+        /* --- FOOTER --- */
+        footer { background: #050611; padding: 60px 20px 30px; border-top: 1px solid var(--border-color); text-align: center; }
+        footer p { font-size: 0.85rem; color: var(--text-gray); margin-bottom: 10px; }
+        .footer-socials a { margin: 0 10px; color: var(--text-white); font-size: 1.2rem; }
+        .footer-socials a:hover { color: var(--primary-purple); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .tos-container { grid-template-columns: 1fr; }
+            .sidebar { position: relative; top: 0; height: auto; padding: 30px 20px; border-right: none; border-bottom: 1px solid var(--border-color); }
+            .sidebar h2 { display: none; }
+            .sidebar-links { display: flex; gap: 10px; width: 100%; justify-content: center; flex-wrap: wrap; }
+            .sidebar-links a { padding: 10px 20px; font-size: 0.85rem; }
+            .content { padding: 40px 20px; }
+            .hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header (Same as Home Page) -->
+    <header>
+        <div class="nav-container">
+            <a class='logo' href='index.html'>
+                <img src="https://i.postimg.cc/RV3RYXH4/6b15ab0ec7a07901363f381f11254741.webp" alt="Galaxy Host Logo">
+                GALAXY HOST
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobile-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href='index.html#home' onclick='closeMenu()'>Home</a></li>
+                    
+                    <li class="nav-item" onclick="toggleDropdown(this)">
+                        <a href="javascript:void(0)">
+                            Games & Services 
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href='minecraft.html' onclick='closeMenu()'>Minecraft Plans</a>
+                            <a href='vps.html' onclick='closeMenu()'>VPS Plans</a>
+                            <a href='amd_vps.html' onclick='closeMenu()'>AMD VPS Plans</a>
+                            <a href='bot_host.html' onclick='closeMenu()'>Bot Hosting</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item" onclick="toggleDropdown(this)">
+                        <a href="javascript:void(0)">
+                            Terms and Policy 
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href='about_us.html' onclick='closeMenu()'>About Us</a>
+                            <a href='legal_policy.html' onclick='closeMenu()'>Legal Policies</a>
+                            <a href='contact.html' onclick='closeMenu()'>Contact Us</a>
+                            <a href='index.html#partner' onclick='closeMenu()'>Partner</a>
+                            <a href='payment.html' onclick='closeMenu()'>Payment</a>
+                            <a href='index.html#blogs' onclick='closeMenu()'>Blogs</a>
+                        </div>
+                    </li>
+
+                    <li><a href='network.html' onclick='closeMenu()'>Network</a></li>
+                    <li><a href='contact.html' onclick='closeMenu()'>Support</a></li>
+                    
+                    <!-- Mobile Only CTA -->
+                    <li style="margin-top: 10px; display: none;" class="mobile-cta-wrapper">
+                         <a class='btn btn-primary' href='index.html#services' style='width: 100%; text-align: center;'>Get Started</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="theme-switcher">
+                    <button class="theme-btn" id="theme-toggle" title="Switch Mode">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+                <a class='btn btn-primary desktop-cta' href='index.html#services'>Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Terms of Service</h1>
+        <p>Please read these terms carefully before using Galaxy Host services. Your use of our services constitutes agreement to these terms.</p>
+    </section>
+
+    <!-- Container -->
+    <div class="tos-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <h2>Contents</h2>
+            <ul class="sidebar-links">
+                <li><a href="tos.html#acceptance" class="active"><i class="fa-solid fa-check"></i> Acceptance of Terms</a></li>
+                <li><a href="tos.html#services"><i class="fa-solid fa-server"></i> Services</a></li>
+                <li><a href="tos.html#billing"><i class="fa-solid fa-credit-card"></i> Billing & Payments</a></li>
+                <li><a href="tos.html#aup"><i class="fa-solid fa-ban"></i> Acceptable Use</a></li>
+                <li><a href="tos.html#intellectual"><i class="fa-solid fa-copyright"></i> Intellectual Property</a></li>
+                <li><a href="tos.html#refunds"><i class="fa-solid fa-rotate-left"></i> Refund Policy</a></li>
+                <li><a href="tos.html#termination"><i class="fa-solid fa-user-slash"></i> Termination</a></li>
+                <li><a href="tos.html#disclaimer"><i class="fa-solid fa-triangle-exclamation"></i> Disclaimer</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            
+            <!-- 1. Acceptance -->
+            <div id="acceptance" class="section-block">
+                <h2 class="section-title">1. Acceptance of Terms <i class="fa-solid fa-clipboard-check"></i></h2>
+                <p class="section-desc">By accessing or using Galaxy Host services, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree to these terms, you must not access our services.</p>
+                
+                <div class="tos-text">
+                    <p>Welcome to Galaxy Host. We provide web hosting, game server hosting (Minecraft, etc.), and virtual private server (VPS) services (collectively, the "Services"). These Terms of Service govern your use of our website and services.</p>
+                    <p>By accessing or using our Services, you confirm that you are at least 18 years of age, or have the consent of a parent or guardian if you are under 18. You also confirm that you have the legal authority to enter into this agreement.</p>
+                </div>
+            </div>
+
+            <!-- 2. Services -->
+            <div id="services" class="section-block">
+                <h2 class="section-title">2. Services <i class="fa-solid fa-layer-group"></i></h2>
+                <p class="section-desc">We reserve the right to modify or discontinue any Service at any time without prior notice.</p>
+                
+                <div class="tos-text">
+                    <p>Galaxy Host offers various hosting solutions including, but not limited to:</p>
+                    <ul>
+                        <li><strong>Minecraft Hosting:</strong> Dedicated resources for running Java Edition and Bedrock Edition servers.</li>
+                        <li><strong>Cloud VPS:</strong> Virtual private servers with scalable CPU, RAM, and Storage resources.</li>
+                        <li><strong>Web Hosting:</strong> Shared resources for websites and applications.</li>
+                        <li><strong>Game Hosting:</strong> Dedicated servers for various games (ARK, Rust, etc.).</li>
+                    </ul>
+                    <p>We do not guarantee that the Services will be uninterrupted, secure, or error-free.</p>
+                </div>
+            </div>
+
+            <!-- 3. Billing & Payments -->
+            <div id="billing" class="section-block">
+                <h2 class="section-title">3. Billing & Payments <i class="fa-solid fa-file-invoice-dollar"></i></h2>
+                <p class="section-desc">Automatic recurring billing and manual payment gateway options.</p>
+                
+                <div class="warning-box">
+                    <h4><i class="fa-solid fa-triangle-exclamation"></i> Non-Refundable Fees</h4>
+                    <p>Certain setup fees, software licenses, or administrative fees may be non-refundable.</p>
+                </div>
+
+                <div class="tos-text">
+                    <p><strong>Pricing:</strong> All prices are in Indian Rupees (INR) unless otherwise stated. We reserve the right to change our prices at any time. Price changes will apply to new orders and will not affect existing active subscriptions until their renewal date.</p>
+                    <p><strong>Payment Methods:</strong> We accept payments via UPI, Credit/Debit Cards (Visa, Mastercard, RuPay), Net Banking, and Digital Wallets. All payments are processed securely.</p>
+                    <p><strong>Invoicing:</strong> An invoice will be generated for every transaction. You are responsible for maintaining current billing information. Failure to pay may result in service suspension.</p>
+                    <p><strong>Fraud:</strong> We have a zero-tolerance policy for payment fraud. Any chargeback initiated without our consent may lead to immediate account termination and legal action.</p>
+                </div>
+            </div>
+
+            <!-- 4. Acceptable Use -->
+            <div id="aup" class="section-block">
+                <h2 class="section-title">4. Acceptable Use <i class="fa-solid fa-shield-halved"></i></h2>
+                <p class="section-desc">Users must adhere to strict usage guidelines to ensure stability and security.</p>
+                
+                <div class="tos-text">
+                    <p>You agree to use our Services only for lawful purposes. You agree NOT to:</p>
+                    <ul>
+                        <li>Use the Services for any illegal purpose, or for the transmission of any material that is unlawful, harmful, threatening, abusive, defamatory, or obscene.</li>
+                        <li>Engage in "Resource Abuse" (e.g., spawning excessive entities in Minecraft to lag other players).</li>
+                        <li>Use excessive resources (CPU, RAM, Disk) beyond what your plan allows.</li>
+                        <li>Engage in any activity that interferes with the functioning of the Services or any other user's use of the Services.</li>
+                        <li>Attempt to gain unauthorized access to any part of the Services or other accounts or computer systems.</li>
+                        <li>Upload or transmit viruses, trojan horses, worms, or any other malicious code.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 5. Intellectual Property -->
+            <div id="intellectual" class="section-block">
+                <h2 class="section-title">5. Intellectual Property <i class="fa-solid fa-copyright"></i></h2>
+                <p class="section-desc">Ownership of software and content provided by Galaxy Host.</p>
+                
+                <div class="tos-text">
+                    <p><strong>Galaxy Host Property:</strong> All content, trademarks, logos, service marks, and other intellectual property displayed on the Galaxy Host website or in the Services are the property of Galaxy Host or its licensors and are protected by copyright laws.</p>
+                    <p><strong>User Content:</strong> You retain ownership of any data, files, or content you upload to your server, provided such content does not violate our terms. You grant Galaxy Host a worldwide, royalty-free, non-exclusive license to use, reproduce, display, and perform your content solely for the purpose of providing the Services to you.</p>
+                    <p><strong>Modpacks & Plugins:</strong> Galaxy Host does not own the rights to third-party Minecraft mods, plugins, or modpacks. You are responsible for ensuring you have the right to use any third-party software on your server.</p>
+                </div>
+            </div>
+
+            <!-- 6. Refund Policy -->
+            <div id="refunds" class="section-block">
+                <h2 class="section-title">6. Refund Policy <i class="fa-solid fa-rotate-left"></i></h2>
+                <p class="section-desc">Eligibility criteria for service refunds.</p>
+                
+                <div class="info-box">
+                    <p><strong>24-Hour Window:</strong> Refund requests must be made within 24 hours of the initial invoice date. After 24 hours, no refund will be issued for the current billing period.</p>
+                </div>
+
+                <div class="tos-text">
+                    <p><strong>Eligibility:</strong> Refunds are processed at our discretion. If a service fails to meet the specifications advertised (e.g., allocated RAM/CPU), a full refund will be issued. If the server is fully functional but you simply wish to cancel, no refund will be provided for the current month.</p>
+                    <p><strong>Processing Time:</strong> Refunds generally take 5-10 business days to appear on the original payment method.</p>
+                    <p><strong>Exception:</strong> We do not offer refunds for downtime caused by external factors outside our control (e.g., DDoS attacks, natural disasters), though we will offer service credits (SLA) as compensation.</p>
+                </div>
+            </div>
+
+            <!-- 7. Termination -->
+            <div id="termination" class="section-block">
+                <h2 class="section-title">7. Termination <i class="fa-solid fa-ban"></i></h2>
+                <p class="section-desc">Conditions under which Galaxy Host may suspend or terminate services.</p>
+                
+                <div class="tos-text">
+                    <p><strong>Voluntary Termination:</strong> You may terminate your service at any time through your Client Area. You will remain responsible for all fees incurred up to the date of termination.</p>
+                    <p><strong>Involuntary Termination:</strong> We reserve the right to suspend or terminate your account at any time for any reason, including but not limited to:</p>
+                    <ul>
+                        <li>Violation of these Terms of Service.</li>
+                        <li>Non-payment of fees.</li>
+                        <li>Abusive behavior towards our staff.</li>
+                        <li>Using the Services for illegal activities.</li>
+                    </ul>
+                    <p><strong>Effect of Termination:</strong> Upon termination, your right to use the Services will immediately cease. All data stored on your server will be deleted immediately upon termination unless a backup was explicitly downloaded by you. We are not responsible for data loss.</p>
+                </div>
+            </div>
+
+            <!-- 8. Disclaimer -->
+            <div id="disclaimer" class="section-block">
+                <h2 class="section-title">8. Disclaimer <i class="fa-solid fa-triangle-exclamation"></i></h2>
+                <p class="section-desc">Limitation of liability and service guarantees.</p>
+                
+                <div class="tos-text">
+                    <p><strong>As-Is Service:</strong> The Services are provided on an "as is" and "as available" basis. Galaxy Host does not warrant that the Services will be uninterrupted, timely, secure, or error-free.</p>
+                    <p><strong>No Warranty:</strong> Galaxy Host expressly disclaims all warranties of any kind, whether express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
+                    <p><strong>Limitation of Liability:</strong> In no event shall Galaxy Host, its officers, directors, employees, or agents, be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your use or inability to use the Services.</p>
+                    <p><strong>Max Liability:</strong> Our total liability to you for all claims arising out of or related to these Terms shall not exceed the amount you paid to us for the Services during the month the claim arose.</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Last Updated: October 26, 2023</p>
+        <div class="footer-socials">
+            <a href="https://discord.gg/7ZZywPtdYt"><i class="fa-brands fa-discord"></i></a>
+            <a href='maintaince.html'><i class="fa-brands fa-twitter"></i></a>
+            <a href='maintaince.html'><i class="fa-brands fa-github"></i></a>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // --- MOBILE MENU LOGIC (Same as Home Page) ---
+        const mobileBtn = document.getElementById('mobile-toggle');
+        const body = document.body;
+        const navLinks = document.querySelector('.nav-links');
+
+        // Toggle menu open/close
+        mobileBtn.addEventListener('click', () => {
+            body.classList.toggle('nav-open');
+            
+            // Switch icon
+            const icon = mobileBtn.querySelector('i');
+            if (body.classList.contains('nav-open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close menu when clicking a link
+        function closeMenu() {
+            if (window.innerWidth <= 992) {
+                body.classList.remove('nav-open');
+                const icon = mobileBtn.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        // Mobile Dropdown Toggle
+        function toggleDropdown(element) {
+            if (window.innerWidth <= 992) {
+                element.classList.toggle('active');
+            }
+        }
+
+        // --- THEME SWITCH LOGIC ---
+        const themeBtn = document.getElementById('theme-toggle');
+        const themeIcon = themeBtn.querySelector('i');
+
+        themeBtn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Initialize Theme on Load
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+
+        // --- SCROLL SPY ---
+        const sections = document.querySelectorAll('.section-block');
+        const navLinksSidebar = document.querySelectorAll('.sidebar-links a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinksSidebar.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Mobile CTA Check
+        function checkMobileCta() {
+            const mobileCta = document.querySelector('.mobile-cta-wrapper');
+            const desktopCta = document.querySelector('.desktop-cta');
+            
+            if (window.innerWidth <= 992) {
+                mobileCta.style.display = 'block';
+                desktopCta.style.display = 'none';
+            } else {
+                mobileCta.style.display = 'none';
+                desktopCta.style.display = 'inline-block';
+            }
+        }
+        
+        window.addEventListener('resize', checkMobileCta);
+        checkMobileCta(); 
+    </script>
+</body>
+</html>

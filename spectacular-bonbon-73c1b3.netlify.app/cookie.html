@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/gJQZ9J5K/Chat-GPT-Image-Jan-11-2026-09-20-12-PM.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Policy | Galaxy Host</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES (Same as Home Page) --- */
+        :root {
+            --bg-dark: #0a0b1e;
+            --bg-sidebar: #11132e;
+            --bg-card: #161936;
+            --primary-purple: #7000ff;
+            --primary-pink: #ff0055;
+            --primary-blue: #00d2ff;
+            
+            --text-white: #ffffff;
+            --text-gray: #aab2cd;
+
+            --gradient-main: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+            --gradient-hover: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+
+            --border-color: rgba(255, 255, 255, 0.1);
+            --glow: 0 0 20px rgba(112, 0, 255, 0.4);
+
+            /* Mobile Menu Variables */
+            --mobile-menu-bg: #0f1129;
+            --mobile-border-color: rgba(255,255,255,0.05);
+        }
+
+        /* --- LIGHT MODE VARIABLES --- */
+        body.light-mode {
+            --bg-dark: #f0f2f5;
+            --bg-sidebar: #e2e8f0;
+            --bg-card: #ffffff;
+            --text-white: #1a202c;
+            --text-gray: #64748b;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --glow: 0 0 20px rgba(112, 0, 255, 0.2);
+            --mobile-menu-bg: #ffffff;
+        }
+
+        /* --- RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Outfit', sans-serif; background-color: var(--bg-dark); color: var(--text-white); line-height: 1.6; overflow-x: hidden; transition: background-color 0.3s ease, color 0.3s ease; }
+        a { text-decoration: none; color: inherit; transition: 0.3s ease; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            padding: 20px 0; 
+            background: rgba(10, 11, 30, 0.7); /* Glassmorphism */
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.3s ease, border 0.3s ease;
+        }
+        body.light-mode header { background: rgba(255, 255, 255, 0.9); }
+
+        .nav-container { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; position: relative; }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.5rem; letter-spacing: 1px; z-index: 1003; color: var(--text-white); }
+        .logo img { height: 45px; width: 45px; border-radius: 50%; border: 2px solid var(--primary-purple); box-shadow: 0 0 15px rgba(112, 0, 255, 0.3); }
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+
+        /* --- NAVIGATION DROPDOWN (DESKTOP) --- */
+        .nav-item { position: relative; cursor: pointer; }
+        .dropdown-menu {
+            display: none; 
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-card);
+            min-width: 220px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 10px 0;
+            flex-direction: column;
+            z-index: 1004;
+        }
+
+        @media (min-width: 993px) {
+            .nav-item:hover .dropdown-menu { display: flex; animation: slideDown 0.2s ease; }
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-menu a {
+            padding: 12px 16px;
+            color: var(--text-gray);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.9rem;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        .dropdown-menu a:hover { color: var(--primary-purple); background: rgba(112, 0, 255, 0.1); padding-left: 20px; }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            position: relative;
+            cursor: pointer;
+            padding: 8px 0;
+        }
+        .nav-links a:hover { color: var(--primary-purple); }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
+            background: var(--gradient-main); transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .header-actions { display: flex; align-items: center; gap: 15px; }
+
+        /* --- THEME SWITCH BUTTON --- */
+        .theme-switcher { position: relative; z-index: 1003; }
+        .theme-btn {
+            background: rgba(255, 255, 255, 0.05); color: var(--text-white); border: 1px solid var(--border-color);
+            width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: 0.3s;
+        }
+        .theme-btn:hover { background: var(--primary-purple); color: white; }
+        body.light-mode .theme-btn { background: #e2e8f0; color: var(--text-white); }
+
+        /* --- BUTTONS --- */
+        .btn { padding: 12px 28px; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; cursor: pointer; border: none; display: inline-block; }
+        .btn-primary { background: var(--gradient-main); color: white; box-shadow: 0 4px 15px rgba(255, 0, 85, 0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 0, 85, 0.5); }
+
+        /* --- MOBILE MENU BUTTON --- */
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-white); font-size: 1.5rem; cursor: pointer; z-index: 1003; padding: 5px; outline: none; }
+
+        /* --- MOBILE MENU STYLES (SAME AS HOME PAGE) --- */
+        @media (max-width: 992px) {
+            .mobile-menu-btn { display: block; }
+            .header-actions .btn-primary { display: none; }
+
+            .nav-links {
+                position: fixed; top: 0; right: -100%; width: 80%; max-width: 350px; height: 100vh;
+                background: var(--mobile-menu-bg); flex-direction: column; justify-content: flex-start;
+                padding-top: 100px; padding-left: 30px; border-left: 1px solid var(--border-color);
+                box-shadow: -5px 0 30px rgba(0,0,0,0.5); transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+                z-index: 1002; overflow-y: auto; align-items: flex-start;
+            }
+
+            body.nav-open .nav-links { right: 0; }
+
+            body.nav-open::after {
+                content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.6); z-index: 1001; backdrop-filter: blur(px); pointer-events: none;
+            }
+
+            .nav-links li { width: 100%; margin-bottom: 20px; }
+            .nav-links a { font-size: 1.1rem; display: block; padding: 10px 0; color: var(--text-white); }
+            .nav-links a::after { display: none; }
+
+            .nav-item .dropdown-menu {
+                display: none; position: static; width: 100%; background: rgba(255,255,255,0.03);
+                box-shadow: none; border: none; border-left: 2px solid var(--primary-purple);
+                margin-left: 10px; padding-left: 0; min-width: auto;
+            }
+            body.light-mode .nav-item .dropdown-menu { background: rgba(0,0,0,0.03); }
+            .nav-item.active .dropdown-menu { display: flex; animation: slideDown 0.3s ease; }
+
+            .mobile-cta-wrapper { display: block !important; margin-top: 20px; width: 90%; }
+        }
+
+        /* --- PAGE SPECIFIC STYLES --- */
+        .hero { padding: 160px 0 60px; text-align: center; background: radial-gradient(circle at 50% 50%, rgba(112,0,255,0.15) 0%, var(--bg-dark) 70%); }
+        .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 20px; color: var(--text-white); }
+        .hero p { font-size: 1.1rem; color: var(--text-gray); max-width: 700px; margin: 0 auto; padding: 0 20px; }
+
+        /* --- DOCUMENT CONTAINER --- */
+        .cookie-container {
+            display: grid; 
+            grid-template-columns: 300px 1fr; 
+            max-width: 1300px; 
+            margin: 0 auto; 
+            padding: 0 20px 80px;
+            align-items: start;
+        }
+
+        /* --- SIDEBAR NAV --- */
+        .sidebar {
+            background: var(--bg-sidebar); 
+            border-right: 1px solid var(--border-color);
+            height: fit-content; /* Changed from 100vh to fit-content */
+            position: sticky; top: 100px; 
+            padding: 20px; 
+            border-radius: 12px;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .sidebar h2 { font-size: 1.1rem; color: var(--text-gray); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .sidebar-links li { margin-bottom: 5px; }
+        .sidebar-links a { display: block; padding: 15px; border-radius: 8px; background: var(--bg-card); color: var(--text-white); font-weight: 500; border: 1px solid transparent; transition: 0.2s; }
+        .sidebar-links a:hover, .sidebar-links a.active { background: rgba(112, 0, 255, 0.1); border-color: var(--primary-purple); color: var(--primary-purple); padding-left: 20px; }
+        
+        /* --- CONTENT AREA --- */
+        .content { padding: 40px; scroll-margin-top: 100px; }
+        .section-block { margin-bottom: 60px; border-bottom: 1px solid var(--border-color); padding-bottom: 40px; }
+        .section-block:last-child { border-bottom: none; }
+        
+        .section-title {
+            font-size: 2rem; font-weight: 700; color: var(--text-white); margin-bottom: 20px; display: flex; align-items: center; gap: 15px;
+        }
+        .section-title i { color: var(--primary-pink); font-size: 1.5rem; }
+        
+        .section-desc { color: var(--text-gray); margin-bottom: 30px; font-size: 1.1rem; line-height: 1.6; }
+
+        .cookie-category { margin-bottom: 40px; }
+        .category-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .category-icon { width: 50px; height: 50px; background: var(--bg-card); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--primary-purple); border: 1px solid var(--border-color); }
+        .category-title { font-size: 1.3rem; font-weight: 700; color: var(--text-white); }
+        .cookie-list { list-style: decimal; padding-left: 25px; margin-bottom: 30px; color: var(--text-gray); }
+        .cookie-list li { margin-bottom: 15px; padding-left: 10px; }
+        .cookie-list li strong { color: var(--text-white); }
+
+        .alert-box { background: rgba(112, 0, 255, 0.1); border-left: 4px solid var(--primary-purple); padding: 25px; border-radius: 8px; margin: 30px 0; }
+        .info-box { background: rgba(0, 210, 255, 0.05); border: 1px solid var(--primary-blue); padding: 20px; border-radius: 8px; margin: 30px 0; }
+        .info-box ul { list-style: disc; padding-left: 20px; color: var(--text-gray); }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #050611;
+            border-top: 1px solid var(--border-color);
+            padding: 80px 20px 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1300px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-col { display: flex; flex-direction: column; }
+        .footer-col.logo-wrapper { align-items: flex-start; }
+        .footer-col.logo-wrapper .logo { margin-bottom: 15px; }
+        .footer-col p { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 20px; max-width: 300px; }
+        .social-links { display: flex; gap: 15px; }
+        .social-links a {
+            width: 36px; height: 36px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center; color: var(--text-white); transition: all 0.3s ease;
+        }
+        .social-links a:hover { background: var(--primary-purple); color: white; transform: translateY(-3px); }
+        .footer-col h4 { color: var(--text-white); font-weight: 600; margin-bottom: 25px; font-size: 1.1rem; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: var(--text-gray); transition: all 0.3s ease; }
+        .footer-col ul li a:hover { color: var(--primary-blue); padding-left: 5px; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .cookie-container { grid-template-columns: 1fr; }
+            .sidebar { position: relative; top: 0; width: 100%; padding: 20px; border-right: none; border-bottom: 1px solid var(--border-color); margin-bottom: 40px; }
+            .sidebar h2 { display: none; }
+            .sidebar-links { display: flex; gap: 10px; width: 100%; justify-content: center; flex-wrap: wrap; }
+            .sidebar-links a { padding: 10px 20px; font-size: 0.9rem; }
+            .content { padding: 20px 0; }
+            .hero h1 { font-size: 2.2rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+            .footer-col.logo-wrapper { align-items: center; }
+            .social-links { justify-content: center; }
+            .footer-col p { margin: 0 auto 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a class='logo' href='index.html'>
+                <img src="https://i.postimg.cc/RV3RYXH4/6b15ab0ec7a07901363f381f11254741.webp" alt="Galaxy Host Logo">
+                GALAXY HOST
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobile-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href='index.html#home' onclick='closeMenu()'>Home</a></li>
+                    
+                    <li class="nav-item" onclick="toggleDropdown(this)">
+                        <a href="javascript:void(0)">
+                            Games & Services 
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href='minecraft.html' onclick='closeMenu()'>Minecraft Plans</a>
+                            <a href='vps.html' onclick='closeMenu()'>VPS Plans</a>
+                            <a href='amd_vps.html' onclick='closeMenu()'>AMD VPS Plans</a>
+                            <a href='bot_host.html' onclick='closeMenu()'>Bot Hosting</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item" onclick="toggleDropdown(this)">
+                        <a href="javascript:void(0)">
+                            Terms and Policy 
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href='about_us.html' onclick='closeMenu()'>About Us</a>
+                            <a href='legal_policy.html' onclick='closeMenu()'>Legal Policies</a>
+                            <a href='contact.html' onclick='closeMenu()'>Contact Us</a>
+                            <a href='index.html#partner' onclick='closeMenu()'>Partner</a>
+                            <a href='payment.html' onclick='closeMenu()'>Payment</a>
+                            <a href='index.html#blogs' onclick='closeMenu()'>Blogs</a>
+                        </div>
+                    </li>
+
+                    <li><a href='network.html' onclick='closeMenu()'>Network</a></li>
+                    <li><a href='contact.html' onclick='closeMenu()'>Support</a></li>
+                    
+                    <!-- Mobile Only CTA -->
+                    <li style="margin-top: 10px; display: none;" class="mobile-cta-wrapper">
+                         <a class='btn btn-primary' href='index.html#services' style='width: 100%; text-align: center;'>Get Started</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="theme-switcher">
+                    <button class="theme-btn" id="theme-toggle" title="Switch Mode">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+                <a class='btn btn-primary desktop-cta' href='index.html#services'>Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Cookie Policy</h1>
+        <p>Information about how we use cookies to enhance your experience and keep our website secure.</p>
+    </section>
+
+    <!-- Container -->
+    <div class="cookie-container">
+        
+        <aside class="sidebar">
+            <h2>Contents</h2>
+            <ul class="sidebar-links">
+                <li><a href="cookie.html#what" class="active">What are Cookies?</a></li>
+                <li><a href="cookie.html#essential">Essential Cookies</a></li>
+                <li><a href="cookie.html#analytical">Analytical Cookies</a></li>
+                <li><a href="cookie.html#management">Management</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            
+            <!-- 1. What are Cookies -->
+            <div id="what" class="section-block">
+                <h2 class="section-title">1. What are Cookies? <i class="fa-solid fa-circle-question"></i></h2>
+                <p class="section-desc">Cookies are small text files stored on your device by websites.</p>
+                
+                <div class="cookie-category">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="fa-solid fa-cookie"></i></div>
+                        <h3 class="category-title">Cookies Explained</h3>
+                    </div>
+                    <div class="cookie-list">
+                        <li><strong>Definition:</strong> A cookie is a small piece of data (text file) that a website sends to your browser when you visit it.</li>
+                        <li><strong>Purpose:</strong> Cookies enable the website to remember your actions and preferences (such as login, region, language) over a period of time, so you don't have to re-enter them every time you return to the site.</li>
+                        <li><strong>Lifecycle:</strong> Cookies typically expire after a certain period unless you choose to delete them earlier.</li>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Essential Cookies -->
+            <div id="essential" class="section-block">
+                <h2 class="section-title">2. Essential Cookies <i class="fa-solid fa-cookie-bite"></i></h2>
+                <p class="section-desc">Required for website functionality. Disabling these may impact your ability to use our services.</p>
+                
+                <div class="alert-box">
+                    <h4><i class="fa-solid fa-triangle-exclamation"></i> Notice</h4>
+                    <p>These cookies are necessary for the website to function. You cannot refuse them without impacting the functionality of website.</p>
+                </div>
+
+                <div class="cookie-category">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="fa-solid fa-user-lock"></i></div>
+                        <h3 class="category-title">Authentication & Security</h3>
+                    </div>
+                    <div class="cookie-list">
+                        <li><strong>Login Persistence:</strong> Keeps you logged in as you navigate between pages.</li>
+                        <li><strong>Cross-Site Protection:</strong> Helps prevent unauthorized access to your account.</li>
+                        <li><strong>Cookies:</strong> Maintains your login session securely.</li>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Analytical Cookies -->
+            <div id="analytical" class="section-block">
+                <h2 class="section-title">3. Analytical Cookies <i class="fa-solid fa-chart-pie"></i></h2>
+                <p class="section-desc">Help us improve user experience and analyze website traffic.</p>
+                
+                <div class="cookie-category">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="fa-solid fa-chart-bar"></i></div>
+                        <h3 class="category-title">Performance & Analytics</h3>
+                    </div>
+                    <div class="cookie-list">
+                        <li><strong>Google Analytics:</strong> We use Google Analytics to analyze how visitors use our website. The data collected (IP address, browser type, landing pages) is anonymized and aggregated.</li>
+                        <li><strong>Page Load Time:</strong> Helps us identify slow-loading pages and optimize our content.</li>
+                        <li><strong>Traffic Sources:</strong> Tracks where our visitors come from (Direct, Search, Social Media) to better target our audience.</li>
+                        <li><strong>Heatmaps:</strong> We may use heatmaps to see which parts of our pages users click on most.</li>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Management -->
+            <div id="management" class="section-block">
+                <h2 class="section-title">4. How to Manage Cookies <i class="fa-solid fa-gears"></i></h2>
+                <p class="section-desc">You have the option to accept or decline cookies, or to delete them.</p>
+                
+                <div class="info-box">
+                    <h4><i class="fa-solid fa-circle-info"></i> Browser Controls</h4>
+                    <ul>
+                        <li>Most browsers allow you to see and delete cookies that have been set.</li>
+                        <li>You can set your browser to block all cookies or to notify you when a cookie is being set.</li>
+                        <li>If you block all cookies, some parts of our website may not function correctly.</li>
+                    </ul>
+                </div>
+
+                <div class="cookie-category">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="fa-brands fa-chrome"></i></div>
+                        <h3 class="category-title">Google Chrome</h3>
+                    </div>
+                    <div class="cookie-list">
+                        <li><strong>Settings:</strong> Chrome Menu > Settings > Privacy and security > Cookies and other site data > See all cookies and site data.</li>
+                        <li><strong>Deletion:</strong> Click on the trash icon next to the website you wish to clear.</li>
+                    </div>
+                </div>
+
+                <div class="cookie-category">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="fa-brands fa-firefox"></i></div>
+                        <h3 class="category-title">Mozilla Firefox</h3>
+                    </div>
+                    <div class="cookie-list">
+                        <li><strong>Settings:</strong> Firefox Menu > Options > Privacy & Security > Cookies and Site Data > Manage Data.</li>
+                        <li><strong>Deletion:</strong> Click "Remove Selected" or "Remove All" to clear cookies.</li>
+                    </div>
+                </div>
+
+                <div class="cookie-category">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="fa-brands fa-apple"></i></div>
+                        <h3 class="category-title">Safari (macOS/iOS)</h3>
+                    </div>
+                    <div class="cookie-list">
+                        <li><strong>Settings:</strong> Safari Menu > Preferences > Privacy > Manage Website Data.</li>
+                        <li><strong>Deletion:</strong> Select website and click "Remove". Select "Remove Now" to clear all data.</li>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col logo-wrapper">
+                <a class='logo' href='index.html'>
+                    <img src="https://i.postimg.cc/RV3RYXH4/6b15ab0ec7a07901363f381f11254741.webp" alt="">
+                    GALAXY HOST
+                </a>
+                <p>Empowering developers and gamers with high-performance infrastructure since 2025.</p>
+                <div class="social-links">
+                    <a href="https://discord.gg/7ZZywPtdYt"><i class="fa-brands fa-discord"></i></a>
+                    <a href='maintaince.html'><i class="fa-brands fa-twitter"></i></a>
+                    <a href='maintaince.html'><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href='minecraft.html'>Minecraft Hosting</a></li>
+                    <li><a href='vps.html'>VPS Hosting</a></li>
+                    <li><a href='contact.html'>Web Hosting</a></li>
+                    <li><a href='amd_vps.html'>AMD VPS</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href='network.html'>Knowledgebase</a></li>
+                    <li><a href="cookie.html#">Billing Portal</a></li>
+                    <li><a href='network.html'>Network Status</a></li>
+                    <li><a href="https://discord.gg/7ZZywPtdYt">Discord Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href='about_us.html'>About Us</a></li>
+                    <li><a href='pp.html'>Privacy Policy</a></li>
+                    <li><a href='tos.html'>Terms of Service</a></li>
+                    <li><a href='contact.html'>Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; border-top: 1px solid var(--border-color); padding-top: 30px; font-size: 0.85rem; color: var(--text-gray);">
+            &copy; 2026 Galaxy Hosting Solutions. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // --- MOBILE MENU LOGIC (Same as Home Page) ---
+        const mobileBtn = document.getElementById('mobile-toggle');
+        const body = document.body;
+        const navLinks = document.querySelector('.nav-links');
+
+        // Toggle menu open/close
+        mobileBtn.addEventListener('click', () => {
+            body.classList.toggle('nav-open');
+            
+            // Switch icon
+            const icon = mobileBtn.querySelector('i');
+            if (body.classList.contains('nav-open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close menu when clicking a link
+        function closeMenu() {
+            if (window.innerWidth <= 992) {
+                body.classList.remove('nav-open');
+                const icon = mobileBtn.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        // Mobile Dropdown Toggle
+        function toggleDropdown(element) {
+            if (window.innerWidth <= 992) {
+                element.classList.toggle('active');
+            }
+        }
+
+        // --- SIDEBAR SCROLL HIGHLIGHT ---
+        const sections = document.querySelectorAll('.section-block');
+        const navLinksSidebar = document.querySelectorAll('.sidebar-links a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinksSidebar.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // --- THEME SWITCH LOGIC ---
+        const themeBtn = document.getElementById('theme-toggle');
+        const themeIcon = themeBtn.querySelector('i');
+
+        themeBtn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Initialize Theme on Load
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+
+        // Mobile CTA Check
+        function checkMobileCta() {
+            const mobileCta = document.querySelector('.mobile-cta-wrapper');
+            const desktopCta = document.querySelector('.desktop-cta');
+            
+            if (window.innerWidth <= 992) {
+                mobileCta.style.display = 'block';
+                desktopCta.style.display = 'none';
+            } else {
+                mobileCta.style.display = 'none';
+                desktopCta.style.display = 'inline-block';
+            }
+        }
+        
+        window.addEventListener('resize', checkMobileCta);
+        checkMobileCta(); 
+    </script>
+</body>
+</html>

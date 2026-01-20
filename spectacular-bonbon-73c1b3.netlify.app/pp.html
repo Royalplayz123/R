@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/gJQZ9J5K/Chat-GPT-Image-Jan-11-2026-09-20-12-PM.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Galaxy Host</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES (Same as Home Page) --- */
+        :root {
+            --bg-dark: #0a0b1e;
+            --bg-card: #161936;
+            --primary-purple: #7000ff;
+            --primary-pink: #ff0055;
+            --primary-blue: #00d2ff;
+            --primary-red: #ff4757; /* For Warning Policies */
+            
+            --text-white: #ffffff;
+            --text-gray: #aab2cd;
+
+            --gradient-main: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+            --gradient-hover: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+
+            --border-color: rgba(255, 255, 255, 0.1);
+            --glow: 0 0 20px rgba(112, 0, 255, 0.4);
+
+            /* Mobile Menu Variables */
+            --mobile-menu-bg: #0f1129;
+            --mobile-border-color: rgba(255,255,255,0.05);
+        }
+
+        /* --- LIGHT MODE VARIABLES --- */
+        body.light-mode {
+            --bg-dark: #f0f2f5;
+            --bg-card: #ffffff;
+            --primary-purple: #7000ff;
+            --primary-pink: #ff0055;
+            --primary-blue: #0066ff;
+            --primary-red: #ff4757;
+            
+            --text-white: #1a202c;
+            --text-gray: #64748b;
+
+            --border-color: rgba(0, 0, 0, 0.1);
+            --glow: 0 0 20px rgba(112, 0, 255, 0.2);
+            --mobile-menu-bg: #ffffff;
+        }
+
+        /* --- RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Outfit', sans-serif; background-color: var(--bg-dark); color: var(--text-white); line-height: 1.6; overflow-x: hidden; transition: background-color 0.3s ease, color 0.3s ease; }
+        a { text-decoration: none; color: inherit; transition: 0.3s ease; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- HEADER (Same as Home Page) --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            padding: 20px 0; 
+            background: rgba(10, 11, 30, 0.7); /* Glassmorphism */
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.3s ease, border 0.3s ease;
+        }
+        body.light-mode header { background: rgba(255, 255, 255, 0.9); }
+
+        .nav-container { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; position: relative; }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.5rem; letter-spacing: 1px; z-index: 1003; color: var(--text-white); }
+        .logo img { height: 45px; width: 45px; object-fit: cover; border-radius: 50%; border: 2px solid var(--primary-purple); box-shadow: 0 0 15px rgba(112, 0, 255, 0.3); }
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+
+        /* --- NAVIGATION DROPDOWN (DESKTOP) --- */
+        .nav-item { position: relative; cursor: pointer; }
+        .dropdown-menu {
+            display: none; 
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-card);
+            min-width: 220px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 10px 0;
+            flex-direction: column;
+            z-index: 1004;
+        }
+
+        @media (min-width: 993px) {
+            .nav-item:hover .dropdown-menu { display: flex; animation: slideDown 0.2s ease; }
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-menu a {
+            padding: 12px 16px;
+            color: var(--text-gray);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.9rem;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        .dropdown-menu a:hover { color: var(--primary-purple); background: rgba(112, 0, 255, 0.1); padding-left: 20px; }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            position: relative;
+            cursor: pointer;
+            padding: 8px 0;
+        }
+        .nav-links a:hover { color: var(--primary-purple); }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
+            background: var(--gradient-main); transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .header-actions { display: flex; align-items: center; gap: 15px; }
+
+        /* --- THEME SWITCH BUTTON --- */
+        .theme-switcher { position: relative; z-index: 1003; }
+        .theme-btn {
+            background: rgba(255, 255, 255, 0.05); color: var(--text-white); border: 1px solid var(--border-color);
+            width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: 0.3s;
+        }
+        .theme-btn:hover { background: var(--primary-purple); color: white; }
+        body.light-mode .theme-btn { background: #e2e8f0; color: var(--text-white); }
+
+        /* --- BUTTONS --- */
+        .btn { padding: 12px 28px; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; cursor: pointer; border: none; display: inline-block; }
+        .btn-primary { background: var(--gradient-main); color: white; box-shadow: 0 4px 15px rgba(255, 0, 85, 0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 0, 85, 0.5); }
+
+        /* --- MOBILE MENU BUTTON --- */
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-white); font-size: 1.5rem; cursor: pointer; z-index: 1003; padding: 5px; outline: none; }
+
+        /* --- MOBILE MENU STYLES (SAME AS HOME PAGE) --- */
+        @media (max-width: 992px) {
+            .mobile-menu-btn { display: block; }
+            .header-actions .btn-primary { display: none; }
+
+            .nav-links {
+                position: fixed; top: 0; right: -100%; width: 80%; max-width: 350px; height: 100vh;
+                background: var(--mobile-menu-bg); flex-direction: column; justify-content: flex-start;
+                padding-top: 100px; padding-left: 30px; border-left: 1px solid var(--border-color);
+                box-shadow: -5px 0 30px rgba(0,0,0,0.5); transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+                z-index: 1002; overflow-y: auto; align-items: flex-start;
+            }
+
+            body.nav-open .nav-links { right: 0; }
+
+            body.nav-open::after {
+                content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.6); z-index: 1001; backdrop-filter: blur(px); pointer-events: none;
+            }
+
+            .nav-links li { width: 100%; margin-bottom: 20px; }
+            .nav-links a { font-size: 1.1rem; display: block; padding: 10px 0; color: var(--text-white); }
+            .nav-links a::after { display: none; }
+
+            .nav-item .dropdown-menu {
+                display: none; position: static; width: 100%; background: rgba(255,255,255,0.03);
+                box-shadow: none; border: none; border-left: 2px solid var(--primary-purple);
+                margin-left: 10px; padding-left: 0; min-width: auto;
+            }
+            body.light-mode .nav-item .dropdown-menu { background: rgba(0,0,0,0.03); }
+            .nav-item.active .dropdown-menu { display: flex; animation: slideDown 0.3s ease; }
+
+            .mobile-cta-wrapper { display: block !important; margin-top: 20px; width: 90%; }
+        }
+
+        /* --- PAGE SPECIFIC STYLES --- */
+        .hero { padding: 140px 0 60px; text-align: center; background: radial-gradient(circle at 50% 50%, rgba(112,0,255,0.1) 0%, var(--bg-dark) 70%); overflow: hidden; }
+        .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 20px; background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.1; }
+        .hero p { font-size: 1.1rem; color: var(--text-gray); max-width: 700px; margin: 0 auto; }
+
+        /* --- DOCUMENT CONTAINER --- */
+        .privacy-container {
+            display: grid; grid-template-columns: 300px 1fr; max-width: 1300px; margin: 0 auto; padding: 0 20px 80px; align-items: start;
+        }
+        
+        /* --- SIDEBAR --- */
+        .sidebar {
+            background: var(--bg-card); border-right: 1px solid var(--border-color);
+            height: 100vh; position: sticky; top: 0; padding: 100px 20px; display: flex; flex-direction: column; gap: 10px;
+        }
+        .sidebar h2 { font-size: 1.1rem; color: var(--text-gray); margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
+        .sidebar-links li { margin-bottom: 5px; }
+        .sidebar-links a {
+            display: block; padding: 15px; border-radius: 8px; background: rgba(255,255,255,0.05);
+            color: var(--text-white); font-weight: 500; border: 1px solid transparent; transition: 0.2s;
+        }
+        .sidebar-links a:hover, .sidebar-links a.active { background: rgba(112, 0, 255, 0.1); border-color: var(--primary-purple); color: var(--primary-purple); padding-left: 20px; }
+        .sidebar-links a i { margin-right: 10px; width: 20px; text-align: center; }
+        .sidebar-links a.active i { color: var(--primary-purple); }
+
+        /* --- CONTENT AREA --- */
+        .content { padding: 80px; scroll-margin-top: 80px; }
+        .section-block { margin-bottom: 60px; border-bottom: 1px solid var(--border-color); padding-bottom: 40px; }
+        .section-block:last-child { border-bottom: none; }
+        .section-title {
+            font-size: 2rem; font-weight: 700; color: var(--text-white); margin-bottom: 20px;
+            display: flex; align-items: center; gap: 15px;
+        }
+        .section-title i { color: var(--primary-pink); font-size: 1.5rem; }
+        .section-desc { color: var(--text-gray); margin-bottom: 30px; font-size: 1.1rem; line-height: 1.6; }
+
+        /* --- PARAGRAPHS & LISTS --- */
+        .pp-text p { margin-bottom: 20px; font-size: 1rem; color: var(--text-gray); line-height: 1.7; }
+        .pp-text ul { list-style: disc; padding-left: 25px; margin-bottom: 20px; color: var(--text-gray); line-height: 1.6; }
+        .pp-text ul li { margin-bottom: 15px; }
+        .pp-text strong { color: var(--text-white); font-weight: 700; }
+        
+        /* --- ALERT/NOTICE BOX --- */
+        .alert-box {
+            background: rgba(112, 0, 255, 0.1); border-left: 4px solid var(--primary-purple);
+            padding: 25px; border-radius: 8px; margin: 30px 0;
+        }
+        .alert-box h4 { color: var(--primary-purple); font-size: 1.1rem; margin-bottom: 10px; font-weight: 700; }
+        .alert-box p { color: var(--text-white); margin: 0; font-size: 0.95rem; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #050611; padding: 80px 20px 30px; border-top: 1px solid var(--border-color);
+        }
+        .footer p { font-size: 0.85rem; color: var(--text-gray); margin-bottom: 10px; }
+        .footer-socials a { margin: 0 10px; color: var(--text-white); font-size: 1.2rem; }
+        .footer-socials a:hover { color: var(--primary-blue); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .privacy-container { grid-template-columns: 1fr; }
+            .sidebar { position: relative; top: 0; height: auto; padding: 30px 20px; border-right: none; border-bottom: 1px solid var(--border-color); }
+            .sidebar h2 { display: none; }
+            .sidebar-links { display: flex; gap: 10px; width: 100%; justify-content: center; flex-wrap: wrap; }
+            .sidebar-links a { padding: 10px 20px; font-size: 0.85rem; }
+            .content { padding: 40px 20px; }
+            .hero h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header (Same as Home Page) -->
+    <header>
+        <div class="nav-container">
+            <a class='logo' href='index.html'>
+                <img src="https://i.postimg.cc/RV3RYXH4/6b15ab0ec7a07901363f381f11254741.webp" alt="Galaxy Host Logo">
+                GALAXY HOST
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobile-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href='index.html#home' onclick='closeMenu()'>Home</a></li>
+                    
+                    <li class="nav-item" onclick="toggleDropdown(this)">
+                        <a href="javascript:void(0)">
+                            Games & Services 
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href='minecraft.html' onclick='closeMenu()'>Minecraft Plans</a>
+                            <a href='vps.html' onclick='closeMenu()'>VPS Plans</a>
+                            <a href='amd_vps.html' onclick='closeMenu()'>AMD VPS Plans</a>
+                            <a href='bot_host.html' onclick='closeMenu()'>Bot Hosting</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item" onclick="toggleDropdown(this)">
+                        <a href="javascript:void(0)">
+                            Terms and Policy 
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href='about_us.html' onclick='closeMenu()'>About Us</a>
+                            <a href='legal_policy.html' onclick='closeMenu()'>Legal Policies</a>
+                            <a href='contact.html' onclick='closeMenu()'>Contact Us</a>
+                            <a href='index.html#partner' onclick='closeMenu()'>Partner</a>
+                            <a href='payment.html' onclick='closeMenu()'>Payment</a>
+                            <a href='index.html#blogs' onclick='closeMenu()'>Blogs</a>
+                        </div>
+                    </li>
+
+                    <li><a href='network.html' onclick='closeMenu()'>Network</a></li>
+                    <li><a href='contact.html' onclick='closeMenu()'>Support</a></li>
+                    
+                    <li style="margin-top: 10px; display: none;" class="mobile-cta-wrapper">
+                         <a class='btn btn-primary' href='index.html#services' style='width: 100%; text-align: center;'>Get Started</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="theme-switcher">
+                    <button class="theme-btn" id="theme-toggle" title="Switch Mode">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+                <a class='btn btn-primary desktop-cta' href='index.html#services'>Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Privacy Policy</h1>
+        <p>At Galaxy Host, we value your privacy. This policy outlines how we collect, use, and protect your data.</p>
+    </section>
+
+    <!-- Container -->
+    <div class="privacy-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <h2>Contents</h2>
+            <ul class="sidebar-links">
+                <li><a href="pp.html#collection" class="active"><i class="fa-solid fa-circle-check"></i> Data Collection</a></li>
+                <li><a href="pp.html#usage"><i class="fa-solid fa-database"></i> Use of Data</a></li>
+                <li><a href="pp.html#cookies"><i class="fa-solid fa-cookie"></i> Cookies</a></li>
+                <li><a href="pp.html#disclosure"><i class="fa-solid fa-share-nodes"></i> Data Disclosure</a></li>
+                <li><a href="pp.html#third-party"><i class="fa-solid fa-link"></i> Third-Party Services</a></li>
+                <li><a href="pp.html#security"><i class="fa-solid fa-lock"></i> Data Security</a></li>
+                <li><a href="pp.html#rights"><i class="fa-solid fa-user-shield"></i> Your Rights</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            
+            <!-- 1. Data Collection -->
+            <div id="collection" class="section-block">
+                <h2 class="section-title">1. Data Collection <i class="fa-solid fa-magnifying-glass"></i></h2>
+                <p class="section-desc">We collect information you provide directly to us, as well as information collected automatically as you interact with our services.</p>
+                
+                <div class="pp-text">
+                    <ul>
+                        <li><strong>Personal Information:</strong> When you create an account, we collect your name, email address, and billing address. This is required to provide our Services and process payments.</li>
+                        <li><strong>Technical Information:</strong> We automatically collect data such as your IP address, browser type, operating system, and device ID. This is used for system administration and security purposes.</li>
+                        <li><strong>Payment Information:</strong> We do not store full credit card numbers. All transactions are processed via third-party payment gateways (Razorpay, Stripe). We only receive a transaction ID and masked last 4 digits for identification.</li>
+                        <li><strong>Server Logs:</strong> Galaxy Host does not actively monitor or log user chat or file content on Minecraft servers. However, we retain access logs to maintain system integrity and prevent abuse.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2. Use of Data -->
+            <div id="usage" class="section-block">
+                <h2 class="section-title">2. Use of Data <i class="fa-solid fa-chart-line"></i></h2>
+                <p class="section-desc">How Galaxy Host uses the information we collect to provide and improve our Services.</p>
+                
+                <div class="pp-text">
+                    <p>We use your data primarily to:</p>
+                    <ul>
+                        <li>Provide, maintain, and improve our Services.</li>
+                        <li>Process transactions and send you related information.</li>
+                        <li>Respond to your comments, questions, and customer service requests.</li>
+                        <li>Send you technical notices, updates, security alerts, and support and administrative messages.</li>
+                        <li>Monitor for and prevent technical issues, fraudulent activity, and security threats.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 3. Cookies -->
+            <div id="cookies" class="section-block">
+                <h2 class="section-title">3. Cookies & Tracking <i class="fa-solid fa-cookie"></i></h2>
+                <p class="section-desc">We use cookies and similar technologies to collect information about your device and browsing behavior.</p>
+                
+                <div class="alert-box">
+                    <h4>Important Note</h4>
+                    <p>By continuing to browse our website, you consent to the use of cookies as described in this policy.</p>
+                </div>
+
+                <div class="pp-text">
+                    <p><strong>Essential Cookies:</strong> These are required for the website to function, such as login authentication and shopping cart functions. You cannot refuse these without impacting the functionality of the website.</p>
+                    <p><strong>Analytical Cookies:</strong> We use Google Analytics to understand how visitors use our website. This helps us improve user experience and analyze traffic patterns. Information collected by Google Analytics is anonymized and aggregated.</p>
+                    <p><strong>Preference Cookies:</strong> These cookies allow us to remember your settings (e.g., login details, language preference) so your experience is more convenient on your next visit.</p>
+                </div>
+            </div>
+
+            <!-- 4. Data Disclosure -->
+            <div id="disclosure" class="section-block">
+                <h2 class="section-title">4. Data Disclosure <i class="fa-solid fa-share-nodes"></i></h2>
+                <p class="section-desc">Galaxy Host may disclose your personal data under specific circumstances.</p>
+                
+                <div class="pp-text">
+                    <p>We do not sell your data to third parties. However, we may share your data in the following scenarios:</p>
+                    <ul>
+                        <li><strong>Service Providers:</strong> We may share your data with trusted third parties who assist us in operating our website, conducting our business, or servicing you (e.g., data centers, DDoS protection providers).</li>
+                        <li><strong>Legal Requirements:</strong> We may disclose information where we believe it is necessary to investigate, prevent, or take action regarding illegal activities, suspected fraud, or potential threats to the physical safety of any person.</li>
+                        <li><strong>Business Transfers:</strong> In the event that Galaxy Host is acquired by or merged with another company, your user data may be transferred as part of the transaction.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 5. Third Party Services -->
+            <div id="third-party" class="section-block">
+                <h2 class="section-title">5. Third-Party Services <i class="fa-solid fa-link"></i></h2>
+                <p class="section-desc">Our Services may integrate with third-party applications and websites.</p>
+                
+                <div class="pp-text">
+                    <p>Galaxy Host utilizes third-party payment gateways (Razorpay, Stripe). When you make a purchase, your payment information is handled securely by these providers under their respective privacy policies. Galaxy Host does not have access to your full payment details.</p>
+                    <p>We may also provide links to third-party sites (e.g., Discord, control panel support) for your convenience. Galaxy Host does not control the privacy policies or practices of these third parties. We encourage you to review their privacy policies.</p>
+                </div>
+            </div>
+
+            <!-- 6. Security -->
+            <div id="security" class="section-block">
+                <h2 class="section-title">6. Data Security <i class="fa-solid fa-lock"></i></h2>
+                <p class="section-desc">We implement reasonable technical and organizational measures to protect your personal information.</p>
+                
+                <div class="pp-text">
+                    <p>We employ industry-standard security measures, including SSL/TLS encryption to protect data in transit. All passwords are hashed and salted. Access to your personally identifiable information is restricted to employees who need to know that information to process your request. We regularly review our security systems to ensure they remain effective.</p>
+                    <p>However, no method of transmission over the Internet, or method of electronic storage, is 100% secure. While we strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security.</p>
+                </div>
+            </div>
+
+            <!-- 7. Your Rights -->
+            <div id="rights" class="section-block">
+                <h2 class="section-title">7. Your Rights <i class="fa-solid fa-user-shield"></i></h2>
+                <p class="section-desc">GDPR Compliance and your control over your data.</p>
+                
+                <div class="pp-text">
+                    <p>You have the right to request a copy of the personal information we hold about you. You can also request that we correct any inaccurate information or delete your personal data (subject to certain limitations).</p>
+                    <p><strong>Account Deletion:</strong> You may close your account at any time. Upon account closure, all associated data will be deleted from our active databases within 30 days, except where we are legally required to retain it.</p>
+                    <p><strong>Cookies:</strong> You can instruct your web browser to refuse all cookies or to indicate when a cookie is being sent. If you disable cookies, however, some parts of the Services may not function properly.</p>
+                    <p>If you have any questions regarding your privacy or our handling of your data, please contact our support team.</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Galaxy Host is committed to protecting your privacy and ensuring the security of your data.</p>
+        <p>Last Updated: October 26, 2023</p>
+        <div class="footer-socials">
+            <a href="https://discord.gg/7ZZywPtdYt"><i class="fa-brands fa-discord"></i></a>
+            <a href='maintaince.html'><i class="fa-brands fa-twitter"></i></a>
+            <a href='maintaince.html'><i class="fa-brands fa-github"></i></a>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // --- MOBILE MENU LOGIC (Same as Home Page) ---
+        const mobileBtn = document.getElementById('mobile-toggle');
+        const body = document.body;
+        const navLinks = document.querySelector('.nav-links');
+
+        // Toggle menu open/close
+        mobileBtn.addEventListener('click', () => {
+            body.classList.toggle('nav-open');
+            
+            // Switch icon
+            const icon = mobileBtn.querySelector('i');
+            if (body.classList.contains('nav-open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close menu when clicking a link
+        function closeMenu() {
+            if (window.innerWidth <= 992) {
+                body.classList.remove('nav-open');
+                const icon = mobileBtn.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        // Mobile Dropdown Toggle
+        function toggleDropdown(element) {
+            if (window.innerWidth <= 992) {
+                element.classList.toggle('active');
+            }
+        }
+
+        // --- THEME SWITCH LOGIC ---
+        const themeBtn = document.getElementById('theme-toggle');
+        const themeIcon = themeBtn.querySelector('i');
+
+        themeBtn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Initialize Theme on Load
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+
+        // --- SCROLL SPY ---
+        const sections = document.querySelectorAll('.section-block');
+        const navLinksSidebar = document.querySelectorAll('.sidebar-links a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinksSidebar.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Mobile CTA Check
+        function checkMobileCta() {
+            const mobileCta = document.querySelector('.mobile-cta-wrapper');
+            const desktopCta = document.querySelector('.desktop-cta');
+            
+            if (window.innerWidth <= 992) {
+                mobileCta.style.display = 'block';
+                desktopCta.style.display = 'none';
+            } else {
+                mobileCta.style.display = 'none';
+                desktopCta.style.display = 'inline-block';
+            }
+        }
+        
+        window.addEventListener('resize', checkMobileCta);
+        checkMobileCta(); 
+    </script>
+</body>
+</html>

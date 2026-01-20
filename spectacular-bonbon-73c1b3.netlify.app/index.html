@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/gJQZ9J5K/Chat-GPT-Image-Jan-11-2026-09-20-12-PM.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galaxy Host | Ultimate Game & Web Hosting</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES (Dark Mode Default) --- */
+        :root {
+            --bg-dark: #0a0b1e;
+            --bg-card: #161936;
+            --primary-purple: #7000ff;
+            --primary-pink: #ff0055;
+            --primary-blue: #00d2ff;
+            
+            --text-white: #ffffff;
+            --text-gray: #aab2cd;
+
+            --gradient-main: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+            --gradient-hover: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+
+            --border-color: rgba(255, 255, 255, 0.1);
+            --glow: 0 0 20px rgba(112, 0, 255, 0.4);
+            
+            /* Mobile Menu Variables */
+            --mobile-menu-bg: #0f1129;
+            --mobile-border-color: rgba(255,255,255,0.05);
+        }
+
+        /* --- LIGHT MODE VARIABLES --- */
+        body.light-mode {
+            --bg-dark: #f0f2f5;
+            --bg-card: #ffffff;
+            --primary-purple: #7000ff;
+            --primary-pink: #ff0055;
+            --primary-blue: #0066ff;
+            
+            --text-white: #1a202c;
+            --text-gray: #64748b;
+
+            --border-color: rgba(0, 0, 0, 0.1);
+            --glow: 0 0 20px rgba(112, 0, 255, 0.2);
+            
+            --mobile-menu-bg: #ffffff;
+            --mobile-border-color: rgba(0,0,0,0.05);
+        }
+
+        /* --- RESET --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* --- LOADING SCREEN --- */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-dark);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .loader-content {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+
+        .loader-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid var(--primary-purple);
+            box-shadow: 0 0 20px rgba(112, 0, 255, 0.3);
+            z-index: 1;
+        }
+
+        .loader-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            color: var(--text-white);
+            animation: rotate 2s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* --- SCROLL ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            background: rgba(10, 11, 30, 0.7); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.3s ease, border 0.3s ease;
+        }
+        
+        body.light-mode header {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative; 
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            z-index: 1003; /* Above everything */
+        }
+
+        .logo img {
+            height: 45px;
+            width: 45px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--primary-purple);
+            box-shadow: 0 0 15px rgba(112, 0, 255, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        /* --- NAVIGATION DROPDOWN (DESKTOP) --- */
+        .nav-item {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none; 
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--bg-card);
+            min-width: 220px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 10px 0;
+            flex-direction: column;
+            z-index: 1004;
+        }
+
+        @media (min-width: 993px) {
+            .nav-item:hover .dropdown-menu {
+                display: flex;
+            }
+        }
+
+        .dropdown-menu a {
+            padding: 12px 16px;
+            color: var(--text-gray);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.9rem;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+
+        .dropdown-menu a:hover {
+            color: var(--primary-purple);
+            background: rgba(112, 0, 255, 0.1);
+            padding-left: 20px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            position: relative;
+            cursor: pointer;
+            padding: 8px 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-purple);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: var(--gradient-main);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- SERVICES DISAPPEAR LOGIC --- */
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+        }
+
+        body.service-hidden .service-card {
+            display: none;
+        }
+
+        body.service-hidden .service-grid {
+            display: none;
+        }
+
+        body.service-hidden .dropdown-menu:hover + .services-section .service-card,
+        body.service-hidden .dropdown-menu:active + .services-section .service-card {
+            display: block;
+        }
+        
+        body.service-hidden .dropdown-menu:hover + .services-section .service-grid,
+        body.service-hidden .dropdown-menu:active + .services-section .service-grid {
+            display: grid;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        /* --- THEME SWITCH BUTTON --- */
+        .theme-switcher {
+            position: relative;
+            display: inline-block;
+            z-index: 1003;
+        }
+
+        .theme-btn {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-white);
+            border: 1px solid var(--border-color);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .theme-btn:hover {
+            background: var(--primary-purple);
+            color: white;
+        }
+        
+        body.light-mode .theme-btn {
+            background: #e2e8f0;
+            color: var(--text-white);
+        }
+
+        /* --- STANDARD BUTTON --- */
+        .btn {
+            padding: 12px 28px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--gradient-main);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 0, 85, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 0, 85, 0.5);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-white);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: var(--primary-purple);
+            color: var(--primary-purple);
+        }
+
+        /* --- MOBILE MENU BUTTON --- */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1003; /* Highest priority */
+            padding: 5px;
+            outline: none;
+        }
+
+        /* --- MOBILE MENU STYLES --- */
+        @media (max-width: 992px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .header-actions .btn-primary {
+                display: none; 
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%; /* Start off-screen */
+                width: 80%;
+                max-width: 350px;
+                height: 100vh;
+                background: var(--mobile-menu-bg);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 100px; 
+                padding-left: 30px;
+                border-left: 1px solid var(--border-color);
+                box-shadow: -5px 0 30px rgba(0,0,0,0.5);
+                transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+                z-index: 1002; /* MENU IS ABOVE OVERLAY */
+                overflow-y: auto;
+                align-items: flex-start;
+            }
+
+            /* Toggle Open */
+            body.nav-open .nav-links {
+                right: 0;
+            }
+
+            /* Overlay Background */
+            body.nav-open::after {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.6);
+                z-index: 1001; /* BELOW MENU */
+                backdrop-filter: blur(px);
+                pointer-events: none; /* FIX: Allows click through so it doesn't block header interactions */
+            }
+
+            .nav-links li {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+                display: block;
+                padding: 10px 0;
+            }
+            
+            .nav-links a::after {
+                display: none;
+            }
+
+            .nav-item .dropdown-menu {
+                display: none; 
+                position: static;
+                width: 100%;
+                background: rgba(255,255,255,0.03);
+                box-shadow: none;
+                border: none;
+                border-left: 2px solid var(--primary-purple);
+                margin-left: 10px;
+                padding-left: 0;
+                min-width: auto;
+            }
+            
+            body.light-mode .nav-item .dropdown-menu {
+                background: rgba(0,0,0,0.03);
+            }
+
+            .nav-item.active .dropdown-menu {
+                display: flex;
+                animation: slideDown 0.3s ease;
+            }
+
+            @keyframes slideDown {
+                from { opacity: 0; transform: translateY(-10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 180px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(112,0,255,0.25) 0%, rgba(10,11,30,0) 70%);
+            z-index: -1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,0,85,0.15) 0%, rgba(10,11,30,0) 70%);
+            z-index: -1;
+        }
+
+        .hero-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.8rem;
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 24px;
+        }
+
+        .hero-text h1 span {
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 1.15rem;
+            color: var(--text-gray);
+            margin-bottom: 32px;
+            max-width: 550px;
+        }
+
+        .hero-stats-row {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .stat-single h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-white);
+        }
+
+        .stat-single span {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .hero-image img {
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color);
+        }
+
+        /* --- TRUSTED BY --- */
+        .trusted-section-wrapper {
+            background: rgba(255,255,255,0.02);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 50px 0 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .trusted-text {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .trusted-text p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        .marquee-container::before,
+        .marquee-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .marquee-container::before {
+            left: 0;
+            background: linear-gradient(to right, var(--bg-dark), transparent);
+        }
+
+        .marquee-container::after {
+            right: 0;
+            background: linear-gradient(to left, var(--bg-dark), transparent);
+        }
+        
+        body.light-mode .marquee-container::before {
+            background: linear-gradient(to right, #f0f2f5, transparent);
+        }
+        body.light-mode .marquee-container::after {
+            background: linear-gradient(to left, #f0f2f5, transparent);
+        }
+
+        .marquee-track {
+            display: inline-block;
+            animation: scrollLeft 30s linear infinite;
+        }
+
+        .marquee-content {
+            display: flex;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .logo-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-gray);
+            transition: 0.3s;
+        }
+
+        .logo-item i {
+            font-size: 3rem;
+            filter: grayscale(100%);
+            opacity: 0.5;
+            transition: 0.3s;
+        }
+
+        .logo-item:hover {
+            color: var(--primary-purple);
+            transform: scale(1.1);
+        }
+        
+        .logo-item span {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- GLOBAL NETWORK MAP --- */
+        .network-map-section {
+            padding: 100px 0;
+            background: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .network-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .map-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .map-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .map-info p {
+            color: var(--text-gray);
+            margin-bottom: 30px;
+        }
+
+        .location-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            text-align: left;
+        }
+
+        .location-item {
+            background: var(--bg-card);
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--border-color);
+            transition: 0.3s;
+        }
+
+        .location-item:hover {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
+        }
+
+        .location-item i {
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+        }
+
+        .location-item span {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .status-badge {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-left: auto;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .map-wrapper {
+            position: relative;
+            height: 400px;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background: #111;
+        }
+
+        .map-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5;
+            filter: grayscale(100%) brightness(0.6);
+            background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .map-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .map-lines line {
+            stroke: rgba(112, 0, 255, 0.4);
+            stroke-width: 1.5;
+            stroke-dasharray: 5, 5;
+            animation: dash 30s linear infinite;
+        }
+
+        @keyframes dash {
+            to { stroke-dashoffset: 1000; }
+        }
+
+        .map-dot {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: var(--primary-pink);
+            border-radius: 50%;
+            border: 3px solid var(--bg-dark); 
+            z-index: 2;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .map-dot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-pink);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: ripple 2s infinite;
+            z-index: -1;
+        }
+
+        .map-dot:hover {
+            transform: scale(1.4);
+            background-color: var(--primary-blue);
+            z-index: 10;
+        }
+        
+        .map-dot:hover::before {
+            background-color: var(--primary-blue);
+            animation: none;
+        }
+
+        @keyframes ripple {
+            0% { width: 100%; height: 100%; opacity: 0.8; }
+            100% { width: 400%; height: 400%; opacity: 0; }
+        }
+
+        .location-tooltip {
+            position: absolute;
+            background: rgba(10, 11, 30, 0.95);
+            border: 1px solid var(--primary-blue);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            pointer-events: none;
+            opacity: 0;
+            transition: 0.2s ease;
+            transform: translateY(10px);
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            white-space: nowrap;
+            left: 50%;
+            bottom: 100%;
+            margin-bottom: 10px;
+        }
+
+        .map-dot:hover .location-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- SERVICES SECTION --- */
+        .services {
+            padding: 100px 0;
+            transition: padding 0.3s ease;
+        }
+        
+        .services.section-collapsed {
+            padding: 20px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .section-header p {
+            color: var(--text-gray);
+        }
+
+        .services-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 35px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-purple);
+            box-shadow: var(--glow);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-main);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: var(--text-gray);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .feature-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-white);
+            font-size: 0.9rem;
+        }
+
+        .feature-list li i {
+            color: var(--primary-pink);
+        }
+
+        .price-area {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-white);
+        }
+
+        .price span {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            font-weight: 400;
+        }
+
+        /* --- FEATURE CARDS --- */
+        .feature-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-purple);
+            box-shadow: 0 10px 30px rgba(112, 0, 255, 0.2);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-main);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background: rgba(112, 0, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover .feature-card-icon-wrapper {
+            background: var(--gradient-main);
+            transform: rotate(360deg);
+        }
+
+        .feature-card i {
+            font-size: 1.5rem;
+            color: var(--text-white);
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-white);
+        }
+
+        .feature-card p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* --- FAQ SECTION --- */
+        .faq-section {
+            padding: 80px 0;
+            background: var(--bg-dark);
+        }
+        
+        .faq-section h2 {
+            color: var(--text-white);
+            margin-bottom: 20px;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary-blue);
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-white);
+            background: rgba(0,0,0,0.2);
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 20px;
+            color: var(--text-gray);
+            transition: max-height 0.4s ease-out, padding 0.4s ease;
+            line-height: 1.6;
+            background: var(--bg-card);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding-bottom: 20px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #050611;
+            padding: 80px 0 30px;
+            border-top: 1px solid var(--border-color);
+            transition: background 0.3s ease;
+        }
+        
+        body.light-mode footer {
+            background: #eef2f6;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-col.logo-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding-left: 200px;
+        }
+
+        .footer-col.logo-wrapper .logo {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            color: var(--text-white);
+        }
+
+        .footer-col.logo-wrapper .logo img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-purple);
+            object-fit: cover;
+        }
+
+        .footer-col p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            max-width: 300px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-white);
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-purple);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-col h4 {
+            color: var(--text-white);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-gray);
+            transition: 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-pink);
+            padding-left: 5px;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-text p {
+                margin: 0 auto 30px;
+            }
+            .hero-stats-row {
+                justify-content: center;
+            }
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+            .map-grid {
+                grid-template-columns: 1fr;
+            }
+            .logo-item i {
+                font-size: 2rem;
+            }
+            .faq-item.active .faq-answer {
+                max-height: 300px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: left;
+            }
+            .footer-col.logo-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div id="preloader">
+        <div class="loader-content">
+            <div class="loader-bg"></div>
+            <i class="fa-solid fa-circle-notch loader-icon"></i>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html#" class="logo">
+                <img src="https://i.postimg.cc/RV3RYXH4/6b15ab0ec7a07901363f381f11254741.webp" alt="Galaxy Host Logo">
+                GALAXY HOST
+            </a>
+            
+            <!-- Mobile Menu Button (Three Lines) -->
+            <button class="mobile-menu-btn" id="mobile-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html#home" onclick="closeMenu()">Home</a></li>
+                    
+                    <li class="nav-item" onclick="toggleDropdown(this)">
+                        <a href="index.html#">
+                            Games & Services 
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href='minecraft.html' onclick='closeMenu()'>Minecraft Plans</a>
+                            <a href='vps.html' onclick='closeMenu()'>VPS Plans</a>
+                            <a href='amd_vps.html' onclick='closeMenu()'>AMD VPS Plans</a>
+                            <a href='bot_host.html' onclick='closeMenu()'>Bot Hosting</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item" onclick="toggleDropdown(this)">
+                        <a href="index.html#">
+                            Terms and Policy 
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href='about_us.html' onclick='closeMenu()'>About Us</a>
+                            <a href='legal_policy.html' onclick='closeMenu()'>Legal Policies</a>
+                            <a href='contact.html' onclick='closeMenu()'>Contact Us</a>
+                            <a href="index.html#partner" onclick="closeMenu()">Partner</a>
+                            <a href='payment.html' onclick='closeMenu()'>Payment</a>
+                            <a href="index.html#blogs" onclick="closeMenu()">Blogs</a>
+                        </div>
+                    </li>
+
+                    <li><a href='network.html' onclick='closeMenu()'>Network</a></li>
+                    <li><a href='contact.html' onclick='closeMenu()'>Support</a></li>
+                    
+                    <li style="margin-top: 10px; display: none;" class="mobile-cta-wrapper">
+                         <a href="index.html#" class="btn btn-primary" style="width: 100%; text-align: center;">Get Started</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <!-- THEME SWITCH BUTTON -->
+                <div class="theme-switcher">
+                    <button class="theme-btn" id="theme-toggle" title="Switch Mode">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+                <a href="index.html#" class="btn btn-primary desktop-cta">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-text">
+                <h1>Unleash Power of Reliable Game Hosting</h1>
+                <p>Deploy your Minecraft, VPS, or Web server in seconds. Powered by next-gen hardware for ultimate gaming and web experience.</p>
+                
+                <div class="hero-stats-row">
+                    <div class="stat-single">
+                        <h4>10k+</h4>
+                        <span>Players Trusted</span>
+                    </div>
+                    <div class="stat-single">
+                        <h4>99.9%</h4>
+                        <span>Uptime</span>
+                    </div>
+                    <div class="stat-single">
+                        <h4>24/7</h4>
+                        <span>Live Support</span>
+                    </div>
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="index.html#services" class="btn btn-primary">View Plans</a>
+                    <a href="index.html#" class="btn btn-outline" style="margin-left: 10px;">Discord</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://i.postimg.cc/PrB8VPZf/file-00000000e6107206a855088949c7e8c7.png" alt="Server Infrastructure">
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By & Marquee Section -->
+    <section class="trusted-section-wrapper" id="partners">
+        <div class="container">
+            
+            <div class="trusted-text">
+                <p>Trusted by Industry Leaders</p>
+            </div>
+
+            <div class="marquee-container">
+                <div class="marquee-track">
+                    <div class="marquee-content">
+                        <div class="logo-item"><i class="fa-brands fa-microsoft"></i><span>Microsoft Azure</span></div>
+                        <div class="logo-item"><i class="fa-brands fa-google"></i><span>Google Cloud</span></div>
+                        <div class="logo-item"><i class="fa-brands fa-aws"></i><span>AWS</span></div>
+                        <div class="logo-item"><i class="fa-brands fa-cloudflare"></i><span>Cloudflare</span></div>
+                        <div class="logo-item"><i class="fa-solid fa-microchip"></i><span>AMD</span></div>
+                        <div class="logo-item"><i class="fa-solid fa-server"></i><span>OVH</span></div>
+                        <div class="logo-item"><i class="fa-solid fa-microchip"></i><span>Intel</span></div>
+                        <div class="logo-item"><i class="fa-brands fa-digital-ocean"></i><span>DigitalOcean</span></div>
+                        <div class="logo-item"><i class="fa-solid fa-hard-drive"></i><span>Dell</span></div>
+                        <div class="logo-item"><i class="fa-brands fa-docker"></i><span>Docker</span></div>
+                        <div class="logo-item"><i class="fa-brands fa-microsoft"></i><span>Microsoft Azure</span></div>
+                        <div class="logo-item"><i class="fa-brands fa-google"></i><span>Google Cloud</span></div>
+                        <div class="logo-item"><i class="fa-brands fa-aws"></i><span>AWS</span></div>
+                        <div class="logo-item"><i class="fa-brands fa-cloudflare"></i><span>Cloudflare</span></div>
+                        <div class="logo-item"><i class="fa-solid fa-microchip"></i><span>AMD</span></div>
+                        <div class="logo-item"><i class="fa-solid fa-server"></i><span>OVH</span></div>
+                        <div class="logo-item"><i class="fa-solid fa-microchip"></i><span>Intel</span></div>
+                        <div class="logo-item"><i class="fa-brands fa-digital-ocean"></i><span>DigitalOcean</span></div>
+                        <div class="logo-item"><i class="fa-solid fa-hard-drive"></i><span>Dell</span></div>
+                        <div class="logo-item"><i class="fa-brands fa-docker"></i><span>Docker</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-card-icon-wrapper">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3>Instant Setup</h3>
+                    <p>Your server is online within seconds of your payment. No waiting, just playing.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card-icon-wrapper">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3>DDoS Protection</h3>
+                    <p>Fortified with enterprise-level DDoS protection to keep your server safe from attacks.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card-icon-wrapper">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Our expert support team is always available to help you with any issues.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card-icon-wrapper">
+                        <i class="fa-solid fa-server"></i>
+                    </div>
+                    <h3>NVMe Hardware</h3>
+                    <p>Latest NVMe SSDs and high-clock speed CPUs for maximum performance.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Network Map Section -->
+    <section class="network-map-section" id="network">
+        <div class="network-container">
+            <div class="map-grid">
+                <div class="map-info">
+                    <h2>Global Network Infrastructure</h2>
+                    <p>We provide high-speed connectivity across globe. Deploy your server in region closest to your players for lowest latency.</p>
+                    
+                    <div class="location-list">
+                        <div class="location-item">
+                            <i class="fa-solid fa-location-dot"></i> 
+                            <span>New York, USA</span>
+                            <span class="status-badge">Online</span>
+                        </div>
+                        <div class="location-item">
+                            <i class="fa-solid fa-location-dot"></i> 
+                            <span>Frankfurt, DE</span>
+                            <span class="status-badge">Online</span>
+                        </div>
+                        <div class="location-item">
+                            <i class="fa-solid fa-location-dot"></i> 
+                            <span>Singapore, SG</span>
+                            <span class="status-badge">Online</span>
+                        </div>
+                        <div class="location-item">
+                            <i class="fa-solid fa-location-dot"></i> 
+                            <span>Mumbai, IN</span>
+                            <span class="status-badge">Online</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="map-wrapper">
+                    <div class="map-bg"></div>
+                    
+                    <svg class="map-lines">
+                        <line x1="25%" y1="35%" x2="48%" y2="28%" />
+                        <line x1="48%" y1="28%" x2="65.7%" y2="61%" />
+                        <line x1="65.7%" y1="61%" x2="75%" y2="70%" />
+                    </svg>
+
+                    <div class="map-dot" style="top: 35%; left: 25%;">
+                        <div class="location-tooltip">New York, USA</div>
+                    </div>
+
+                    <div class="map-dot" style="top: 28%; left: 48%;">
+                        <div class="location-tooltip">Frankfurt, DE</div>
+                    </div>
+
+                    <div class="map-dot" style="top: 58%; left: 65%;">
+                        <div class="location-tooltip">Mumbai, IN</div>
+                    </div>
+
+                    <div class="map-dot" style="top: 70%; left: 75%;">
+                        <div class="location-tooltip">Singapore, SG</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>Our Hosting Solutions</h2>
+            <p>Choose the perfect environment for your needs. From Minecraft servers to high-performance VPS.</p>
+        </div>
+
+        <div class="services-grid">
+            
+            <div class="service-card">
+                <div class="service-icon" style="color: #4ade80;">
+                    <i class="fa-solid fa-cube"></i>
+                </div>
+                <h3>Minecraft Hosting</h3>
+                <p>Host your Minecraft server with zero lag. Supports all versions, modpacks, and plugins.</p>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-check"></i> Unlimited NVMe Storage</li>
+                    <li><i class="fa-solid fa-check"></i> DDoS Protection Included</li>
+                    <li><i class="fa-solid fa-check"></i> Modpack Installer</li>
+                    <li><i class="fa-solid fa-check"></i> 99.99% Uptime</li>
+                </ul>
+                <div class="price-area">
+                    <div class="price">₹250<span>/mo</span></div>
+                    <a class='btn btn-outline' href='minecraft.html' style='padding: 8px 20px; font-size: 0.85rem;'>Order</a>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon" style="color: #60a5fa;">
+                    <i class="fa-solid fa-server"></i>
+                </div>
+                <h3>Cloud VPS</h3>
+                <p>Full root access and dedicated resources. Perfect for developers and custom applications.</p>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-check"></i> Dedicated Resources</li>
+                    <li><i class="fa-solid fa-check"></i> High Frequency CPUs</li>
+                    <li><i class="fa-solid fa-check"></i> Instant Setup</li>
+                    <li><i class="fa-solid fa-check"></i> Full Root Access</li>
+                </ul>
+                <div class="price-area">
+                    <div class="price">₹400<span>/mo</span></div>
+                    <a class='btn btn-outline' href='vps.html' style='padding: 8px 20px; font-size: 0.85rem;'>Deploy</a>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon" style="color: #f472b6;">
+                    <i class="fa-solid fa-globe"></i>
+                </div>
+                <h3>Web Hosting</h3>
+                <p>Fast, secure, and easy-to-use hosting for your website. Includes a free domain.</p>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-check"></i> Free SSL Certificate</li>
+                    <li><i class="fa-solid fa-check"></i> cPanel Control Panel</li>
+                    <li><i class="fa-solid fa-check"></i> 1-Click Installs</li>
+                    <li><i class="fa-solid fa-check"></i> Daily Backups</li>
+                </ul>
+                <div class="price-area">
+                    <div class="price">₹200<span>/mo</span></div>
+                    <a class='btn btn-outline' href='contact.html' style='padding: 8px 20px; font-size: 0.85rem;'>Start</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 50px; font-size: 2.5rem;">Common Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">How long does setup take? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Setup is instant! As soon as your payment is confirmed, your server is deployed and you'll receive your login credentials via email.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can I upgrade my plan later? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Absolutely. You can upgrade or downgrade your plan at any time through our client panel. Your data remains completely safe.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What DDoS protection do you use? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">We use a multi-layer 12Tbps Path.net and CosmicGuard protection system to ensure your server stays online even during massive attacks.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col logo-wrapper">
+                    <a href="index.html#" class="logo">
+                        <img src="https://i.postimg.cc/RV3RYXH4/6b15ab0ec7a07901363f381f11254741.webp" alt="">
+                        GALAXY HOST
+                    </a>
+                    <p>Empowering developers and gamers with high-performance infrastructure since 2025.</p>
+                    <div class="social-links">
+                        <a href="https://discord.gg/7ZZywPtdYt"><i class="fa-brands fa-discord"></i></a>
+                        <a href='maintaince.html'><i class="fa-brands fa-twitter"></i></a>
+                        <a href='maintaince.html'><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href='minecraft.html'>Minecraft Hosting</a></li>
+                        <li><a href='vps.html'>VPS Hosting</a></li>
+                        <li><a href='contact.html'>Web Hosting</a></li>
+                        <li><a href='amd_vps.html'>AMD VPS</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href='network.html'>Knowledgebase</a></li>
+                        <li><a href="index.html#">Billing Portal</a></li>
+                        <li><a href='network.html'>Network Status</a></li>
+                        <li><a href="https://discord.gg/7ZZywPtdYt">Discord Support</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href='about_us.html'>About Us</a></li>
+                        <li><a href='pp.html'>Privacy Policy</a></li>
+                        <li><a href='tos.html'>Terms of Service</a></li>
+                        <li><a href='contact.html'>Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="text-align: center; border-top: 1px solid var(--border-color); padding-top: 30px; font-size: 0.85rem; color: var(--text-gray);">
+                &copy; 2026 Galaxy Hosting Solutions. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- PRELOADER LOGIC ---
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        });
+
+        // --- SCROLL REVEAL LOGIC ---
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        reveal();
+
+        // --- MOBILE MENU LOGIC ---
+        const mobileBtn = document.getElementById('mobile-toggle');
+        const body = document.body;
+        const navLinks = document.querySelector('.nav-links');
+
+        // Toggle menu open/close
+        mobileBtn.addEventListener('click', () => {
+            body.classList.toggle('nav-open');
+            
+            // Switch icon
+            const icon = mobileBtn.querySelector('i');
+            if (body.classList.contains('nav-open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close menu when clicking a link
+        function closeMenu() {
+            if (window.innerWidth <= 992) {
+                body.classList.remove('nav-open');
+                const icon = mobileBtn.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        // Mobile Dropdown Toggle
+        function toggleDropdown(element) {
+            if (window.innerWidth <= 992) {
+                element.classList.toggle('active');
+            }
+        }
+
+        // --- NAVIGATION DROPDOWN & DISAPPEAR LOGIC (DESKTOP) ---
+        const gamesLink = document.querySelector('.nav-item');
+        const dropdown = document.querySelector('.dropdown-menu');
+        const servicesSection = document.querySelector('.services');
+
+        if (window.innerWidth > 992) {
+            gamesLink.addEventListener('mouseenter', () => {
+                body.classList.add('service-hidden');
+                servicesSection.classList.add('section-collapsed');
+            });
+
+            dropdown.addEventListener('mouseenter', () => {
+                body.classList.remove('service-hidden');
+                servicesSection.classList.remove('section-collapsed');
+            });
+
+            gamesLink.addEventListener('mouseleave', () => {
+                body.classList.add('service-hidden');
+                servicesSection.classList.add('section-collapsed');
+            });
+        }
+
+        // --- THEME SWITCH LOGIC ---
+        const themeBtn = document.getElementById('theme-toggle');
+        const themeIcon = themeBtn.querySelector('i');
+
+        themeBtn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+
+        // --- FAQ ACCORDION LOGIC ---
+        const faqQuestions = document.querySelectorAll('.faq-question');
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Mobile CTA Check
+        function checkMobileCta() {
+            const mobileCta = document.querySelector('.mobile-cta-wrapper');
+            const desktopCta = document.querySelector('.desktop-cta');
+            
+            if (window.innerWidth <= 992) {
+                mobileCta.style.display = 'block';
+                desktopCta.style.display = 'none';
+            } else {
+                mobileCta.style.display = 'none';
+                desktopCta.style.display = 'inline-block';
+            }
+        }
+        
+        window.addEventListener('resize', checkMobileCta);
+        checkMobileCta(); 
+
+    </script>
+</body>
+</html>

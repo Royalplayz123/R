@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/gJQZ9J5K/Chat-GPT-Image-Jan-11-2026-09-20-12-PM.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Galaxy Host</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES (Same as Home Page) --- */
+        :root {
+            --bg-dark: #0a0b1e;
+            --bg-card: #161936;
+            --primary-purple: #7000ff;
+            --primary-pink: #ff0055;
+            --primary-blue: #00d2ff;
+            
+            --text-white: #ffffff;
+            --text-gray: #aab2cd;
+
+            --gradient-main: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+            --gradient-hover: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+
+            --border-color: rgba(255, 255, 255, 0.1);
+            --glow: 0 0 20px rgba(112, 0, 255, 0.4);
+            
+            /* Mobile Menu Variables */
+            --mobile-menu-bg: #0f1129;
+            --mobile-border-color: rgba(255,255,255,0.05);
+        }
+
+        /* --- LIGHT MODE VARIABLES --- */
+        body.light-mode {
+            --bg-dark: #f0f2f5;
+            --bg-card: #ffffff;
+            --primary-purple: #7000ff;
+            --primary-pink: #ff0055;
+            --primary-blue: #0066ff;
+            
+            --text-white: #1a202c;
+            --text-gray: #64748b;
+
+            --border-color: rgba(0, 0, 0, 0.1);
+            --glow: 0 0 20px rgba(112, 0, 255, 0.2);
+            
+            --mobile-menu-bg: #ffffff;
+            --mobile-border-color: rgba(0,0,0,0.05);
+        }
+
+        /* --- RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Outfit', sans-serif; background-color: var(--bg-dark); color: var(--text-white); line-height: 1.6; overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; transition: 0.3s ease; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            padding: 20px 0; 
+            background: rgba(10, 11, 30, 0.7); /* Glassmorphism */
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.3s ease, border 0.3s ease;
+        }
+        body.light-mode header { background: rgba(255, 255, 255, 0.9); }
+
+        .nav-container { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; position: relative; }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.5rem; letter-spacing: 1px; z-index: 1003; color: var(--text-white); }
+        .logo img { height: 45px; width: 45px; border-radius: 50%; border: 2px solid var(--primary-purple); box-shadow: 0 0 15px rgba(112, 0, 255, 0.3); }
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+
+        /* --- NAVIGATION DROPDOWN (DESKTOP) --- */
+        .nav-item { position: relative; cursor: pointer; }
+
+        .dropdown-menu {
+            display: none; 
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-card);
+            min-width: 220px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 10px 0;
+            flex-direction: column;
+            z-index: 1004;
+        }
+
+        @media (min-width: 993px) {
+            .nav-item:hover .dropdown-menu { display: flex; animation: slideDown 0.2s ease; }
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-menu a {
+            padding: 12px 16px;
+            color: var(--text-gray);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.9rem;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+
+        .dropdown-menu a:hover { color: var(--primary-purple); background: rgba(112, 0, 255, 0.1); padding-left: 20px; }
+
+        .nav-links a { position: relative; color: var(--text-gray); font-weight: 500; transition: 0.3s ease; cursor: pointer; padding: 8px 0; }
+        .nav-links a:hover { color: var(--primary-purple); }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
+            background: var(--gradient-main); transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .header-actions { display: flex; align-items: center; gap: 15px; }
+
+        /* --- THEME SWITCH BUTTON --- */
+        .theme-switcher { position: relative; z-index: 1003; }
+        .theme-btn {
+            background: rgba(255, 255, 255, 0.05); color: var(--text-white); border: 1px solid var(--border-color);
+            width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: 0.3s;
+        }
+        .theme-btn:hover { background: var(--primary-purple); color: white; }
+        body.light-mode .theme-btn { background: #e2e8f0; color: var(--text-white); }
+
+        /* --- BUTTONS --- */
+        .btn { padding: 12px 28px; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; cursor: pointer; border: none; display: inline-block; }
+        .btn-primary { background: var(--gradient-main); color: white; box-shadow: 0 4px 15px rgba(255, 0, 85, 0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 0, 85, 0.5); }
+
+        /* --- MOBILE MENU BUTTON --- */
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-white); font-size: 1.5rem; cursor: pointer; z-index: 1003; padding: 5px; outline: none; }
+
+        /* --- MOBILE MENU STYLES (SAME AS HOME PAGE) --- */
+        @media (max-width: 992px) {
+            .mobile-menu-btn { display: block; }
+            .header-actions .btn-primary { display: none; }
+
+            .nav-links {
+                position: fixed; top: 0; right: -100%; width: 80%; max-width: 350px; height: 100vh;
+                background: var(--mobile-menu-bg); flex-direction: column; justify-content: flex-start;
+                padding-top: 100px; padding-left: 30px; border-left: 1px solid var(--border-color);
+                box-shadow: -5px 0 30px rgba(0,0,0,0.5); transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+                z-index: 1002; overflow-y: auto; align-items: flex-start;
+            }
+
+            body.nav-open .nav-links { right: 0; }
+
+            body.nav-open::after {
+                content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.6); z-index: 1001; backdrop-filter: blur(px); pointer-events: none;
+            }
+
+            .nav-links li { width: 100%; margin-bottom: 20px; }
+            .nav-links a { font-size: 1.1rem; display: block; padding: 10px 0; color: var(--text-white); }
+            .nav-links a::after { display: none; }
+
+            .nav-item .dropdown-menu {
+                display: none; position: static; width: 100%; background: rgba(255,255,255,0.03);
+                box-shadow: none; border: none; border-left: 2px solid var(--primary-purple);
+                margin-left: 10px; padding-left: 0; min-width: auto;
+            }
+            body.light-mode .nav-item .dropdown-menu { background: rgba(0,0,0,0.03); }
+            .nav-item.active .dropdown-menu { display: flex; animation: slideDown 0.3s ease; }
+
+            .mobile-cta-wrapper { display: block !important; margin-top: 20px; width: 90%; }
+        }
+
+        /* --- PAGE SPECIFIC STYLES --- */
+        .hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 70vh; align-items: center; margin-top: 60px; position: relative; }
+        .hero-text { padding: 80px; z-index: 2; position: relative; }
+        .hero-text h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 25px; line-height: 1.1; color: var(--text-white); }
+        .hero-text p { font-size: 1.1rem; color: var(--text-gray); margin-bottom: 40px; max-width: 600px; }
+        
+        .hero-image { height: 70vh; overflow: hidden; position: relative; }
+        .hero-image img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8); }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(10, 11, 30, 0.4), rgba(10, 11, 30, 0.8)); }
+
+        /* Content */
+        .content { padding: 100px 20px; max-width: 1300px; margin: 0 auto; }
+        .section-header { margin-bottom: 50px; text-align: center; }
+        .section-subtitle { color: var(--primary-blue); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 15px; display: block; }
+        .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; color: var(--text-white); }
+        .section-desc { font-size: 1.1rem; color: var(--text-gray); max-width: 900px; margin: 0 auto; line-height: 1.7; }
+
+        .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 80px; }
+        .value-card { background: var(--bg-card); border: 1px solid var(--border-color); padding: 40px; border-radius: 16px; transition: 0.3s; text-align: center; }
+        .value-card:hover { border-color: var(--primary-purple); transform: translateY(-10px); }
+        .value-icon { width: 60px; height: 60px; background: rgba(112, 0, 255, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; font-size: 1.5rem; color: var(--text-white); }
+        .value-title { font-size: 1.5rem; font-weight: 700; color: var(--text-white); margin-bottom: 10px; }
+        .value-text { font-size: 0.95rem; color: var(--text-gray); line-height: 1.6; }
+
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; }
+        .team-member { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; overflow: hidden; transition: 0.3s; }
+        .team-member:hover { transform: translateY(-5px); }
+        .team-img-wrapper {
+            width: 160px;
+            height: 160px;
+            margin: 30px auto 0;   /* center align */
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #7000ff; /* optional border */
+}
+
+        .team-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+}
+
+        .team-member:hover .team-img-wrapper img { transform: scale(1.05); }
+        .team-info { padding: 25px; text-align: center; }
+        .team-role { font-size: 0.85rem; color: var(--primary-blue); font-weight: 600; text-transform: uppercase; margin-bottom: 5px; display: block; }
+        .team-name { font-size: 1.3rem; font-weight: 700; color: var(--text-white); margin-bottom: 15px; }
+        .team-link { display: block; margin-top: 10px; }
+        .team-icon { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-purple); transition: 0.3s; }
+        .team-icon:hover { transform: scale(1.1); }
+
+        .cta-section { padding: 100px 20px; text-align: center; background: linear-gradient(to bottom, var(--bg-dark), rgba(112, 0, 255, 0.1)); }
+        .cta-box { max-width: 800px; margin: 0 auto; background: var(--gradient-main); padding: 60px 20px; border-radius: 20px; position: relative; overflow: hidden; }
+        .cta-box h2 { font-size: 2rem; font-weight: 800; margin-bottom: 20px; position: relative; z-index: 2; color: white; }
+        .cta-box p { font-size: 1.1rem; color: rgba(255, 255, 255, 0.9); position: relative; z-index: 2; }
+        .cta-btn { margin-top: 30px; background: white; color: var(--primary-purple); padding: 15px 30px; border-radius: 8px; font-weight: 700; display: inline-block; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .cta-btn:hover { transform: translateY(-3px); }
+
+        /* --- FOOTER --- */
+        footer { background: #050611; padding: 80px 20px 30px; border-top: 1px solid var(--border-color); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; max-width: 1300px; margin: 0 auto 40px; }
+        .footer-col { display: flex; flex-direction: column; }
+        .footer-col.logo-wrapper { align-items: flex-start; }
+        .footer-col.logo-wrapper .logo { margin-bottom: 15px; }
+        .footer-col p { color: var(--text-gray); margin-bottom: 20px; line-height: 1.6; max-width: 300px; }
+        .social-links { display: flex; gap: 15px; }
+        .social-links a {
+            width: 36px; height: 36px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center; color: var(--text-white); transition: all 0.3s ease;
+        }
+        .social-links a:hover { background: var(--primary-purple); color: white; transform: translateY(-3px); }
+        .footer-col h4 { color: var(--text-white); font-weight: 600; margin-bottom: 25px; font-size: 1.1rem; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 12px; }
+        .footer-col ul li a { color: var(--text-gray); transition: all 0.3s ease; }
+        .footer-col ul li a:hover { color: var(--primary-blue); padding-left: 5px; }
+
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; padding: 40px 0; margin-top: 60px; }
+            .hero-text { text-align: center; padding: 40px 20px; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .hero-image { height: 400px; order: -1; }
+            .values-grid { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+            .footer-col.logo-wrapper { align-items: center; }
+            .social-links { justify-content: center; }
+            .footer-col p { margin: 0 auto 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a class='logo' href='index.html'>
+                <img src="https://i.postimg.cc/RV3RYXH4/6b15ab0ec7a07901363f381f11254741.webp" alt="Galaxy Host Logo">
+                GALAXY HOST
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobile-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href='index.html#home' onclick='closeMenu()'>Home</a></li>
+                    
+                    <li class="nav-item" onclick="toggleDropdown(this)">
+                        <a href="javascript:void(0)">
+                            Games & Services 
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href='minecraft.html' onclick='closeMenu()'>Minecraft Plans</a>
+                            <a href='vps.html' onclick='closeMenu()'>VPS Plans</a>
+                            <a href='amd_vps.html' onclick='closeMenu()'>AMD VPS Plans</a>
+                            <a href='bot_host.html' onclick='closeMenu()'>Bot Hosting</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item" onclick="toggleDropdown(this)">
+                        <a href="javascript:void(0)">
+                            Terms and Policy 
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href='about_us.html' onclick='closeMenu()'>About Us</a>
+                            <a href='legal_policy.html' onclick='closeMenu()'>Legal Policies</a>
+                            <a href='contact.html' onclick='closeMenu()'>Contact Us</a>
+                            <a href='index.html#partner' onclick='closeMenu()'>Partner</a>
+                            <a href='payment.html' onclick='closeMenu()'>Payment</a>
+                            <a href='index.html#blogs' onclick='closeMenu()'>Blogs</a>
+                        </div>
+                    </li>
+
+                    <li><a href='network.html' onclick='closeMenu()'>Network</a></li>
+                    <li><a href='contact.html' onclick='closeMenu()'>Support</a></li>
+                    
+                    <li style="margin-top: 10px; display: none;" class="mobile-cta-wrapper">
+                         <a class='btn btn-primary' href='index.html#services' style='width: 100%; text-align: center;'>Get Started</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="theme-switcher">
+                    <button class="theme-btn" id="theme-toggle" title="Switch Mode">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+                <a class='btn btn-primary desktop-cta' href='index.html#services'>Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Powering Your Ambitions</h1>
+            <p>At Galaxy Host, we are more than just a hosting company. We are your partners in success, providing the infrastructure and support you need to build the next big thing.</p>
+            <a class='btn btn-primary' href='contact.html'>Get In Touch</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Server Infrastructure">
+            <div class="hero-overlay"></div>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <div class="content">
+        
+        <div class="section-header">
+            <span class="section-subtitle">Since 2025</span>
+            <h2 class="section-title">Our Story</h2>
+            <p class="section-desc">Founded by a team of passionate gamers and engineers, Galaxy Host started with a simple mission: to provide high-performance, affordable hosting that actually works.</p>
+        </div>
+
+        <div class="section-header">
+            <span class="section-subtitle">Our Values</span>
+            <h2 class="section-title">Why Choose Galaxy Host?</h2>
+        </div>
+
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon"><i class="fa-solid fa-bolt"></i></div>
+                <h3 class="value-title">Performance</h3>
+                <p class="value-text">We don't compromise on speed. Our NVMe SSDs ensure that your applications run smoothly.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon"><i class="fa-solid fa-handshake"></i></div>
+                <h3 class="value-title">Trust</h3>
+                <p class="value-text">Transparency is our policy. No hidden fees and clear Terms of Service.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon"><i class="fa-solid fa-users"></i></div>
+                <h3 class="value-title">Community</h3>
+                <p class="value-text">We aren't just a service; we are part of the community.</p>
+            </div>
+        </div>
+
+        <div class="section-header">
+            <span class="section-subtitle">Meet The Minds</span>
+            <h2 class="section-title">The Team</h2>
+        </div>
+
+<div class="team-grid">
+
+    <!-- ROW 1 -->
+    <div class="team-member">
+        <div class="team-img-wrapper">
+            <img src="https://i.postimg.cc/NMw3d7G0/8a48bd2a7ff461c49b69bb0d68e3862c.webp">
+        </div>
+        <div class="team-info">
+            <span class="team-role">CEO & Founder</span>
+            <h3 class="team-name">Smarty</h3>
+        </div>
+    </div>
+
+    <div class="team-member">
+        <div class="team-img-wrapper">
+            <img src="https://i.postimg.cc/SNT7VSQd/d0d005d3863475b77a2b586c44fbaad7.webp">
+        </div>
+        <div class="team-info">
+            <span class="team-role">Co.Founder</span>
+            <h3 class="team-name">Not Yash</h3>
+        </div>
+    </div>
+
+    <div class="team-member">
+        <div class="team-img-wrapper">
+            <img src="https://i.postimg.cc/05tw1tgx/e4df7f70effca34fcb8d5c01537509f0.webp">
+        </div>
+        <div class="team-info">
+            <span class="team-role">Co.Founder</span>
+            <h3 class="team-name">Shaurya</h3>
+        </div>
+    </div>
+
+    <div class="team-member">
+        <div class="team-img-wrapper">
+            <img src="https://i.postimg.cc/26r2M0sw/cfd9ab516fa639b27d2543504e96f5b8.webp">
+        </div>
+        <div class="team-info">
+            <span class="team-role">Co.Founder</span>
+            <h3 class="team-name">No_Playz</h3>
+        </div>
+    </div>
+
+    <!-- ROW 2 -->
+    <div class="team-member">
+        <div class="team-img-wrapper">
+            <img src="https://i.postimg.cc/C10StVMB/7715c2b0ad420b7edbad6b17eac83961.webp">
+        </div>
+        <div class="team-info">
+            <span class="team-role">Manager</span>
+            <h3 class="team-name">Krishna</h3>
+        </div>
+    </div>
+
+    <div class="team-member">
+        <div class="team-img-wrapper">
+            <img src="https://i.postimg.cc/Xv7ggrdp/c7a0a4a1b8db00ca975ff7d4eefa4c8c.webp">
+        </div>
+        <div class="team-info">
+            <span class="team-role">Head Dev</span>
+            <h3 class="team-name">Piyush</h3>
+        </div>
+    </div>
+
+    <div class="team-member">
+        <div class="team-img-wrapper">
+            <img src="https://i.postimg.cc/wBvhmSYW/de8c7f8d7f4e701c3c5ba23404237b4f.webp">
+        </div>
+        <div class="team-info">
+            <span class="team-role">Head Dev</span>
+            <h3 class="team-name">Shubham</h3>
+        </div>
+    </div>
+
+    <div class="team-member">
+        <div class="team-img-wrapper">
+            <img src="https://i.postimg.cc/vmzNYRL5/e0e79d29155c327c103a05eeaff778c8.webp">
+        </div>
+        <div class="team-info">
+            <span class="team-role">Moderator</span>
+            <h3 class="team-name">Sidharth</h3>
+        </div>
+    </div>
+
+</div>
+
+
+        <div id="contact" class="cta-section">
+            <div class="cta-box">
+                <h2>Ready to Launch?</h2>
+                <p>Join thousands of satisfied customers who trust Galaxy Host.</p>
+                <a class='cta-btn' href='index.html#services'>View Plans</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col logo-wrapper">
+                <a class='logo' href='index.html'>
+                    <img src="https://i.postimg.cc/RV3RYXH4/6b15ab0ec7a07901363f381f11254741.webp" alt="">
+                    GALAXY HOST
+                </a>
+                <p>Empowering developers and gamers with high-performance infrastructure since 2025.</p>
+                <div class="social-links">
+                    <a href="https://discord.gg/7ZZywPtdYt"><i class="fa-brands fa-discord"></i></a>
+                    <a href='maintaince.html'><i class="fa-brands fa-twitter"></i></a>
+                    <a href='maintaince.html'><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href='minecraft.html'>Minecraft Hosting</a></li>
+                    <li><a href='vps.html'>VPS Hosting</a></li>
+                    <li><a href='contact.html'>Web Hosting</a></li>
+                    <li><a href='amd_vps.html'>Dedicated Servers</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href='network.html'>Knowledgebase</a></li>
+                    <li><a href="about_us.html#">Billing Portal</a></li>
+                    <li><a href='network.html'>Network Status</a></li>
+                    <li><a href="https://discord.gg/7ZZywPtdYt">Discord Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href='about_us.html'>About Us</a></li>
+                    <li><a href='legal_policy.html'>Privacy Policy</a></li>
+                    <li><a href='legal_policy.html'>Terms of Service</a></li>
+                    <li><a href='contact.html'>Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; border-top: 1px solid var(--border-color); padding-top: 30px; font-size: 0.85rem; color: var(--text-gray);">
+            &copy; 2026 Galaxy Hosting Solutions. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // --- MOBILE MENU LOGIC (Same as Home Page) ---
+        const mobileBtn = document.getElementById('mobile-toggle');
+        const body = document.body;
+        const navLinks = document.querySelector('.nav-links');
+
+        // Toggle menu open/close
+        mobileBtn.addEventListener('click', () => {
+            body.classList.toggle('nav-open');
+            
+            // Switch icon
+            const icon = mobileBtn.querySelector('i');
+            if (body.classList.contains('nav-open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close menu when clicking a link
+        function closeMenu() {
+            if (window.innerWidth <= 992) {
+                body.classList.remove('nav-open');
+                const icon = mobileBtn.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        // Mobile Dropdown Toggle
+        function toggleDropdown(element) {
+            if (window.innerWidth <= 992) {
+                element.classList.toggle('active');
+            }
+        }
+
+        // --- THEME SWITCH LOGIC ---
+        const themeBtn = document.getElementById('theme-toggle');
+        const themeIcon = themeBtn.querySelector('i');
+
+        themeBtn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+
+        // Mobile CTA Check
+        function checkMobileCta() {
+            const mobileCta = document.querySelector('.mobile-cta-wrapper');
+            const desktopCta = document.querySelector('.desktop-cta');
+            
+            if (window.innerWidth <= 992) {
+                mobileCta.style.display = 'block';
+                desktopCta.style.display = 'none';
+            } else {
+                mobileCta.style.display = 'none';
+                desktopCta.style.display = 'inline-block';
+            }
+        }
+        
+        window.addEventListener('resize', checkMobileCta);
+        checkMobileCta(); 
+    </script>
+</body>
+</html>
