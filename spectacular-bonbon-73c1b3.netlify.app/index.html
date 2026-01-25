@@ -413,20 +413,22 @@
                 right: 0;
             }
 
-            /* Overlay Background */
-            body.nav-open::after {
-                content: '';
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.6);
-                z-index: 1001; /* BELOW MENU */
-                backdrop-filter: blur(px);
-                pointer-events: none; /* FIX: Allows click through so it doesn't block header interactions */
-            }
+            /* MOBILE OVERLAY */
+.nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    z-index: 1001;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
 
+body.nav-open .nav-overlay {
+    opacity: 1;
+    pointer-events: all;
+}
+            
             .nav-links li {
                 width: 100%;
                 margin-bottom: 20px;
@@ -1781,6 +1783,7 @@
 </body>
 
 </html>
+
 
 
 
