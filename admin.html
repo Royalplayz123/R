@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — DevCraft</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050508;--bg2:#0b0b12;--bg3:#10101a;--bg4:#17172a;
+  --accent:#7c5cfc;--accent2:#00e5cc;--danger:#ff4d6d;--warn:#f5a623;--success:#00e5cc;
+  --text:#f0eeff;--muted:#6a6890;--muted2:#9896b8;
+  --border:rgba(124,92,252,0.15);--border2:rgba(255,255,255,0.07)
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--text);font-family:'DM Mono',monospace;display:flex;flex-direction:column}
+
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(124,92,252,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(124,92,252,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+
+/* LOCK SCREEN */
+#lock{position:fixed;inset:0;background:var(--bg);z-index:1000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0}
+.lock-box{background:rgba(16,16,26,0.95);border:1px solid var(--border);border-radius:4px;padding:48px 40px;width:340px;text-align:center;position:relative;z-index:1}
+.lock-box::before{content:'';position:absolute;inset:-1px;border-radius:4px;background:linear-gradient(135deg,rgba(124,92,252,0.2),transparent 50%);z-index:-1;pointer-events:none}
+.lock-icon{width:48px;height:48px;border-radius:50%;background:rgba(124,92,252,0.12);border:1px solid rgba(124,92,252,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:20px}
+.lock-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:6px}
+.lock-sub{font-size:11px;color:var(--muted);letter-spacing:.08em;margin-bottom:28px}
+.lock-input{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:3px;padding:12px 16px;color:var(--text);font-family:'DM Mono',monospace;font-size:14px;letter-spacing:.1em;text-align:center;outline:none;transition:.2s}
+.lock-input:focus{border-color:rgba(124,92,252,0.5);background:rgba(124,92,252,0.05)}
+.lock-input.error{border-color:var(--danger);animation:shake .3s ease}
+.lock-btn{width:100%;margin-top:12px;background:rgba(124,92,252,0.2);border:1px solid rgba(124,92,252,0.4);color:var(--text);font-family:'Syne',sans-serif;font-size:13px;font-weight:600;padding:12px;border-radius:3px;cursor:pointer;letter-spacing:.08em;text-transform:uppercase;transition:.2s}
+.lock-btn:hover{background:rgba(124,92,252,0.35)}
+.lock-err{font-size:11px;color:var(--danger);margin-top:10px;min-height:16px;letter-spacing:.05em}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* MAIN LAYOUT */
+#app{display:none;height:100%;flex-direction:column;position:relative;z-index:1}
+
+/* TOPBAR */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:56px;border-bottom:1px solid var(--border2);background:var(--bg2);flex-shrink:0}
+.topbar-logo{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;letter-spacing:-.02em}
+.topbar-logo span{color:var(--accent)}
+.topbar-logo em{font-style:normal;font-size:9px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-left:8px}
+.topbar-actions{display:flex;align-items:center;gap:10px}
+.topbar-status{font-size:10px;letter-spacing:.12em;color:var(--success);display:flex;align-items:center;gap:5px}
+.topbar-status::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--success);flex-shrink:0}
+.btn{font-family:'Syne',sans-serif;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:8px 16px;border-radius:3px;cursor:pointer;border:1px solid;transition:all .15s}
+.btn-ghost{background:transparent;border-color:var(--border2);color:var(--muted2)}
+.btn-ghost:hover{border-color:rgba(124,92,252,0.4);color:var(--text)}
+.btn-accent{background:rgba(124,92,252,0.2);border-color:rgba(124,92,252,0.5);color:var(--text)}
+.btn-accent:hover{background:rgba(124,92,252,0.35)}
+.btn-danger{background:rgba(255,77,109,0.1);border-color:rgba(255,77,109,0.4);color:var(--danger)}
+.btn-danger:hover{background:rgba(255,77,109,0.2)}
+.btn-warn{background:rgba(245,166,35,0.1);border-color:rgba(245,166,35,0.35);color:var(--warn)}
+.btn-warn:hover{background:rgba(245,166,35,0.2)}
+.btn-success{background:rgba(0,229,204,0.1);border-color:rgba(0,229,204,0.35);color:var(--success)}
+.btn-success:hover{background:rgba(0,229,204,0.2)}
+.btn-sm{padding:5px 11px;font-size:10px}
+
+/* BODY */
+.main-body{display:flex;flex:1;overflow:hidden}
+
+/* SIDEBAR */
+.sidebar{width:220px;border-right:1px solid var(--border2);background:var(--bg2);padding:20px 0;display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
+.sidebar-section{padding:0 12px;margin-bottom:4px}
+.sidebar-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding:0 8px;margin-bottom:8px;margin-top:16px}
+.sidebar-item{display:flex;align-items:center;justify-content:space-between;padding:9px 10px;border-radius:3px;cursor:pointer;font-size:12px;color:var(--muted2);transition:.15s;border:1px solid transparent}
+.sidebar-item:hover{background:rgba(124,92,252,0.07);color:var(--text)}
+.sidebar-item.active{background:rgba(124,92,252,0.12);border-color:rgba(124,92,252,0.2);color:var(--text)}
+.sidebar-item-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sidebar-count{font-size:9px;background:rgba(124,92,252,0.15);color:var(--accent);padding:2px 7px;border-radius:20px;flex-shrink:0;margin-left:6px}
+.sidebar-add{display:flex;align-items:center;gap:6px;padding:9px 10px;border-radius:3px;cursor:pointer;font-size:11px;color:var(--accent);opacity:.7;transition:.15s}
+.sidebar-add:hover{opacity:1;background:rgba(124,92,252,0.07)}
+.sidebar-add::before{content:'+';font-size:14px;font-weight:600}
+.sidebar-bottom{margin-top:auto;padding:12px}
+.sidebar-logout{width:100%;text-align:center;font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;padding:9px;border-radius:3px;cursor:pointer;border:1px solid var(--border2);background:transparent;font-family:'DM Mono',monospace;transition:.15s}
+.sidebar-logout:hover{color:var(--danger);border-color:rgba(255,77,109,0.3)}
+
+/* CONTENT */
+.content{flex:1;overflow-y:auto;padding:28px 32px}
+.content-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:12px}
+.content-title-wrap{}
+.content-eyebrow{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.content-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.03em}
+.content-actions{display:flex;gap:8px;flex-shrink:0}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.stat-card{background:var(--bg3);border:1px solid var(--border2);border-radius:4px;padding:16px 20px}
+.stat-label{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.stat-val{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;letter-spacing:-.04em}
+.stat-val.accent{color:var(--accent)}
+.stat-val.success{color:var(--success)}
+.stat-val.warn{color:var(--warn)}
+
+/* PLANS TABLE */
+.table-wrap{background:var(--bg3);border:1px solid var(--border2);border-radius:4px;overflow:hidden}
+table{width:100%;border-collapse:collapse}
+thead{background:var(--bg4)}
+th{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding:12px 16px;text-align:left;font-weight:500;border-bottom:1px solid var(--border2)}
+td{padding:13px 16px;font-size:12px;color:var(--muted2);border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(124,92,252,0.04)}
+.td-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:var(--text)}
+.td-desc{font-size:11px;color:var(--muted);margin-top:2px}
+.td-price{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text)}
+.td-price-unit{font-size:10px;color:var(--muted);margin-top:1px}
+.badge{display:inline-block;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px}
+.badge-popular{background:rgba(124,92,252,0.15);color:var(--accent);border:1px solid rgba(124,92,252,0.3)}
+.badge-normal{background:rgba(255,255,255,0.05);color:var(--muted);border:1px solid rgba(255,255,255,0.08)}
+.row-actions{display:flex;gap:6px;align-items:center}
+.empty-state{padding:48px;text-align:center;color:var(--muted);font-size:12px}
+.empty-state span{display:block;font-size:32px;margin-bottom:12px;opacity:.3}
+
+/* MODAL OVERLAY */
+#modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:500;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+#modal-overlay.open{display:flex}
+.modal{background:var(--bg3);border:1px solid var(--border);border-radius:4px;width:min(520px,94vw);max-height:88vh;overflow-y:auto;position:relative}
+.modal::before{content:'';position:absolute;inset:-1px;border-radius:4px;background:linear-gradient(135deg,rgba(124,92,252,0.15),transparent 50%);z-index:-1;pointer-events:none}
+.modal-head{padding:24px 28px 0;display:flex;align-items:center;justify-content:space-between}
+.modal-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;letter-spacing:-.02em}
+.modal-close{background:transparent;border:none;color:var(--muted);font-size:20px;cursor:pointer;line-height:1;padding:4px 8px;border-radius:3px;transition:.15s}
+.modal-close:hover{color:var(--text);background:rgba(255,255,255,0.07)}
+.modal-body{padding:20px 28px 28px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;background:var(--bg2);border:1px solid var(--border2);border-radius:3px;padding:10px 14px;color:var(--text);font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:.2s}
+.field input:focus,.field select,.field textarea:focus{border-color:rgba(124,92,252,0.5);background:rgba(124,92,252,0.04)}
+.field select{cursor:pointer}
+.field textarea{resize:vertical;min-height:72px;line-height:1.6}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field-hint{font-size:10px;color:var(--muted);margin-top:5px;line-height:1.5}
+.features-list{display:flex;flex-direction:column;gap:6px;margin-bottom:8px}
+.feat-row{display:flex;gap:6px;align-items:center}
+.feat-row input{flex:1}
+.feat-del{background:transparent;border:1px solid rgba(255,77,109,0.25);color:var(--danger);border-radius:3px;width:30px;height:36px;cursor:pointer;font-size:16px;line-height:1;flex-shrink:0;transition:.15s}
+.feat-del:hover{background:rgba(255,77,109,0.15)}
+.add-feat{background:transparent;border:1px solid var(--border2);color:var(--muted2);font-family:'DM Mono',monospace;font-size:11px;padding:8px 14px;border-radius:3px;cursor:pointer;width:100%;transition:.15s;letter-spacing:.05em}
+.add-feat:hover{border-color:rgba(124,92,252,0.4);color:var(--text)}
+.modal-footer{display:flex;justify-content:flex-end;gap:8px;padding-top:16px;border-top:1px solid var(--border2)}
+.toggle-wrap{display:flex;align-items:center;gap:10px;margin-top:4px}
+.toggle-switch{position:relative;width:44px;height:24px;cursor:pointer;flex-shrink:0}
+.toggle-switch input{opacity:0;width:0;height:0;position:absolute}
+.toggle-track{position:absolute;inset:0;background:rgba(255,255,255,0.08);border-radius:12px;border:1px solid var(--border2);transition:.2s;pointer-events:none}
+.toggle-thumb{position:absolute;width:16px;height:16px;border-radius:50%;background:var(--muted);top:3px;left:3px;transition:.2s;pointer-events:none}
+.toggle-switch input:checked+.toggle-track{background:rgba(124,92,252,0.45);border-color:rgba(124,92,252,0.6)}
+.toggle-switch input:checked+.toggle-track+.toggle-thumb{left:23px;background:var(--accent)}
+.toggle-label{font-size:12px;color:var(--muted2);cursor:pointer}
+
+/* TOAST */
+#toast{position:fixed;bottom:24px;right:24px;background:var(--bg4);border:1px solid var(--border);border-radius:4px;padding:12px 20px;font-size:12px;color:var(--text);z-index:999;transform:translateY(20px);opacity:0;transition:.25s;pointer-events:none}
+#toast.show{transform:translateY(0);opacity:1}
+#toast.t-success{border-color:rgba(0,229,204,0.35)}
+#toast.t-danger{border-color:rgba(255,77,109,0.35);color:var(--danger)}
+
+/* DELETE CONFIRM */
+#confirm-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:600;display:none;align-items:center;justify-content:center}
+#confirm-overlay.open{display:flex}
+.confirm-box{background:var(--bg3);border:1px solid rgba(255,77,109,0.3);border-radius:4px;padding:28px;width:min(360px,90vw);text-align:center}
+.confirm-icon{font-size:28px;margin-bottom:12px}
+.confirm-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:6px}
+.confirm-sub{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6}
+.confirm-btns{display:flex;gap:8px;justify-content:center}
+
+/* scrollbar */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(124,92,252,0.25);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:rgba(124,92,252,0.45)}
+</style>
+</head>
+<body>
+
+<!-- LOCK SCREEN -->
+<div id="lock">
+  <div class="lock-box">
+    <div class="lock-icon">🔐</div>
+    <div class="lock-title">Admin Access</div>
+    <div class="lock-sub">// enter your password to continue</div>
+    <input class="lock-input" type="password" id="lock-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')tryUnlock()">
+    <button class="lock-btn" onclick="tryUnlock()">Unlock Panel</button>
+    <div class="lock-err" id="lock-err"></div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app" style="display:none;flex-direction:column;height:100%">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:16px">
+      <div class="topbar-logo">Dev<span>Craft</span> <em>Admin</em></div>
+    </div>
+    <div class="topbar-actions">
+      <div class="topbar-status">Panel Online</div>
+      <a href="index.html" target="_blank" class="btn btn-ghost">View Live Site ↗</a>
+      <button class="btn btn-ghost" onclick="doLogout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="main-body">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Categories</div>
+        <div id="sidebar-cats"></div>
+        <div class="sidebar-add" onclick="openCatModal()">Add Category</div>
+      </div>
+      <div class="sidebar-bottom">
+        <button class="sidebar-logout" onclick="doLogout()">// logout</button>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content" id="content-area">
+      <!-- rendered by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- PLAN MODAL -->
+<div id="modal-overlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title" id="modal-title-text">Add Plan</div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body" id="modal-body-content"></div>
+  </div>
+</div>
+
+<!-- CONFIRM DIALOG -->
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <div class="confirm-icon">⚠️</div>
+    <div class="confirm-title" id="confirm-title">Delete Plan?</div>
+    <div class="confirm-sub" id="confirm-sub">This action cannot be undone.</div>
+    <div class="confirm-btns">
+      <button class="btn btn-ghost" onclick="closeConfirm()">Cancel</button>
+      <button class="btn btn-danger" id="confirm-ok">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const PASS = 'admin123';
+const PLANS_KEY = 'devcraft_plans';
+const CATS_KEY = 'devcraft_cats';
+
+const defaultCats=[{id:'mc-plugin',name:'Minecraft Plugins'},{id:'web-dev',name:'Web Development'},{id:'mc-server',name:'Server Setup'},{id:'hosting',name:'Hosting & Panels'},{id:'discord',name:'Discord Server'}];
+const defaultPlans=[
+  {id:1,cat:'mc-plugin',name:'Basic Plugin',desc:'Single-feature custom plugin for your Minecraft server',price:'500',unit:'per plugin',featured:false,features:['1 custom feature','Source code included','1 revision round']},
+  {id:2,cat:'mc-plugin',name:'Advanced Plugin',desc:'Complex multi-feature plugin with GUI menus & database',price:'1500',unit:'per plugin',featured:true,features:['Multiple custom features','GUI menus & inventory UI','MySQL/SQLite storage','3 revision rounds']},
+  {id:3,cat:'web-dev',name:'Landing Page',desc:'Clean, responsive single-page site for your brand or server',price:'800',unit:'one-time',featured:false,features:['Responsive design','Custom domain setup','Contact/enquiry form']},
+  {id:4,cat:'web-dev',name:'Full Website',desc:'Multi-page site with CMS/admin panel',price:'2500',unit:'one-time',featured:true,features:['Up to 5 pages','Admin dashboard','SEO optimized','1 month after-support']},
+  {id:5,cat:'mc-server',name:'Basic Server',desc:'Vanilla/Spigot/Paper server with essential plugins configured',price:'600',unit:'one-time',featured:false,features:['Server configuration','Essential plugins','Anti-cheat & security']},
+  {id:6,cat:'mc-server',name:'Custom Gamemode',desc:'Full custom gamemode — Skyblock, SMP, Factions, Prison & more',price:'3000',unit:'one-time',featured:true,features:['Complete gamemode setup','Custom plugin suite','Spawn world build','Staff rank configuration']},
+  {id:7,cat:'hosting',name:'Pterodactyl Setup',desc:'Full Pterodactyl panel installation with node & custom theme',price:'700',unit:'one-time',featured:false,features:['Panel installation','Node configuration','Theme installation','Addon setup']},
+  {id:8,cat:'hosting',name:'Full Hosting Stack',desc:'Pterodactyl + Billing panel + Status page — complete stack',price:'1200',unit:'one-time',featured:true,features:['Pterodactyl panel','WHMCS/Paymenter billing','Status page setup','Full configuration & docs']},
+  {id:9,cat:'discord',name:'Basic Discord',desc:'Clean structured Discord with channels, roles & essential bots',price:'300',unit:'one-time',featured:false,features:['Channel structure','Role hierarchy','Essential bots setup']},
+  {id:10,cat:'discord',name:'Premium Discord',desc:'Fully branded Discord server with custom bots & ticketing system',price:'800',unit:'one-time',featured:true,features:['Full server branding','Custom bot integration','Ticket/support system','Verification & security']}
+];
+
+function getCats(){try{const d=localStorage.getItem(CATS_KEY);return d?JSON.parse(d):defaultCats}catch{return defaultCats}}
+function getPlans(){try{const d=localStorage.getItem(PLANS_KEY);return d?JSON.parse(d):defaultPlans}catch{return defaultPlans}}
+function saveCats(c){localStorage.setItem(CATS_KEY,JSON.stringify(c))}
+function savePlans(p){localStorage.setItem(PLANS_KEY,JSON.stringify(p))}
+
+let activeCat=null;
+let editPlanId=null;
+let modalType='';
+
+// LOCK
+function tryUnlock(){
+  const v=document.getElementById('lock-pass').value;
+  const err=document.getElementById('lock-err');
+  if(v===PASS){
+    document.getElementById('lock').style.display='none';
+    const app=document.getElementById('app');
+    app.style.display='flex';
+    activeCat=getCats()[0]?.id;
+    renderAll();
+  } else {
+    err.textContent='// incorrect password';
+    const inp=document.getElementById('lock-pass');
+    inp.classList.add('error');
+    setTimeout(()=>{inp.classList.remove('error');},500);
+  }
+}
+function doLogout(){
+  document.getElementById('app').style.display='none';
+  document.getElementById('lock').style.display='flex';
+  document.getElementById('lock-pass').value='';
+  document.getElementById('lock-err').textContent='';
+}
+
+// RENDER
+function renderAll(){
+  renderSidebar();
+  renderContent();
+}
+
+function renderSidebar(){
+  const cats=getCats();
+  const plans=getPlans();
+  const el=document.getElementById('sidebar-cats');
+  el.innerHTML=cats.map(c=>`
+    <div class="sidebar-item${activeCat===c.id?' active':''}" onclick="selectCat('${c.id}')">
+      <span class="sidebar-item-name">${c.name}</span>
+      <span class="sidebar-count">${plans.filter(p=>p.cat===c.id).length}</span>
+    </div>`).join('');
+}
+
+function selectCat(id){activeCat=id;renderAll();}
+
+function renderContent(){
+  const cats=getCats();
+  const plans=getPlans();
+  const cat=cats.find(c=>c.id===activeCat);
+  const catPlans=plans.filter(p=>p.cat===activeCat);
+  const el=document.getElementById('content-area');
+  if(!cat){el.innerHTML='<div class="empty-state"><span>//</span>Select a category</div>';return;}
+
+  const totalRev=catPlans.reduce((s,p)=>s+Number(p.price),0);
+  const popCount=catPlans.filter(p=>p.featured).length;
+
+  el.innerHTML=`
+    <div class="content-header">
+      <div class="content-title-wrap">
+        <div class="content-eyebrow">// category</div>
+        <div class="content-title">${cat.name}</div>
+      </div>
+      <div class="content-actions">
+        <button class="btn btn-danger btn-sm" onclick="deleteCat('${cat.id}')">Delete Category</button>
+        <button class="btn btn-warn btn-sm" onclick="editCat('${cat.id}')">Rename</button>
+        <button class="btn btn-accent" onclick="openPlanModal(null)">+ New Plan</button>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-label">Total Plans</div><div class="stat-val accent">${catPlans.length}</div></div>
+      <div class="stat-card"><div class="stat-label">Featured</div><div class="stat-val success">${popCount}</div></div>
+      <div class="stat-card"><div class="stat-label">Avg Price</div><div class="stat-val warn">₹${catPlans.length?Math.round(totalRev/catPlans.length).toLocaleString():'0'}</div></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Plan</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Features</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${catPlans.length?catPlans.map(p=>`
+            <tr>
+              <td>
+                <div class="td-name">${p.name}</div>
+                <div class="td-desc">${p.desc}</div>
+              </td>
+              <td>
+                <div class="td-price">₹${Number(p.price).toLocaleString()}</div>
+                <div class="td-price-unit">/ ${p.unit}</div>
+              </td>
+              <td>${p.featured?'<span class="badge badge-popular">Popular</span>':'<span class="badge badge-normal">Standard</span>'}</td>
+              <td style="font-size:11px;color:var(--muted);max-width:200px">${p.features.join(' · ')}</td>
+              <td>
+                <div class="row-actions">
+                  <button class="btn btn-warn btn-sm" onclick="openPlanModal(${p.id})">Edit</button>
+                  <button class="btn btn-danger btn-sm" onclick="confirmDeletePlan(${p.id},'${p.name.replace(/'/g,"\\'")}')">Delete</button>
+                </div>
+              </td>
+            </tr>`).join(''):`
+            <tr><td colspan="5"><div class="empty-state"><span>∅</span>No plans yet — click "+ New Plan" to add one.</div></td></tr>`}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+// PLAN MODAL
+function openPlanModal(id){
+  editPlanId=id;modalType='plan';
+  const plans=getPlans();
+  const cats=getCats();
+  const p=id!=null?plans.find(x=>x.id==id):{id:null,cat:activeCat,name:'',desc:'',price:'',unit:'one-time',featured:false,features:[]};
+  document.getElementById('modal-title-text').textContent=id?'Edit Plan':'New Plan';
+  document.getElementById('modal-body-content').innerHTML=`
+    <div class="field">
+      <label>Category</label>
+      <select id="f-cat">${cats.map(c=>`<option value="${c.id}"${p.cat===c.id?' selected':''}>${c.name}</option>`).join('')}</select>
+    </div>
+    <div class="field"><label>Plan Name</label><input id="f-name" value="${p.name}" placeholder="e.g. Advanced Plugin"></div>
+    <div class="field"><label>Description</label><textarea id="f-desc" placeholder="Brief description of this plan">${p.desc}</textarea></div>
+    <div class="field-row">
+      <div class="field"><label>Price (₹)</label><input id="f-price" type="number" value="${p.price}" placeholder="1000"></div>
+      <div class="field"><label>Billing Unit</label><input id="f-unit" value="${p.unit}" placeholder="one-time / per plugin"></div>
+    </div>
+    <div class="field">
+      <label>Mark as Popular</label>
+      <div class="toggle-wrap">
+        <label class="toggle-switch" for="f-featured">
+          <input type="checkbox" id="f-featured"${p.featured?' checked':''}>
+          <div class="toggle-track"></div>
+          <div class="toggle-thumb"></div>
+        </label>
+        <span class="toggle-label" onclick="document.getElementById('f-featured').click()">Show "Popular" badge on this plan</span>
+      </div>
+    </div>
+    <div class="field">
+      <label>Features</label>
+      <div class="features-list" id="feat-list">
+        ${p.features.map((f,i)=>`
+          <div class="feat-row" id="fr-${i}">
+            <input value="${f}" placeholder="Feature description" id="fi-${i}">
+            <button class="feat-del" onclick="removeFeat(${i})">×</button>
+          </div>`).join('')}
+      </div>
+      <button class="add-feat" onclick="addFeat()">+ Add Feature</button>
+      <div class="field-hint">// each feature appears as a bullet point on the plan card</div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-accent" onclick="savePlan()">Save Plan</button>
+    </div>`;
+  document.getElementById('modal-overlay').classList.add('open');
+}
+let featCount=0;
+function addFeat(){
+  const list=document.getElementById('feat-list');
+  const i=Date.now();
+  const row=document.createElement('div');
+  row.className='feat-row';row.id='fr-'+i;
+  row.innerHTML=`<input placeholder="Feature description" id="fi-${i}"><button class="feat-del" onclick="removeFeat(${i})">×</button>`;
+  list.appendChild(row);
+}
+function removeFeat(i){const el=document.getElementById('fr-'+i);if(el)el.remove();}
+function savePlan(){
+  const cats=getCats();
+  const name=document.getElementById('f-name').value.trim();
+  const price=document.getElementById('f-price').value.trim();
+  if(!name||!price){showToast('Name and price are required.','danger');return;}
+  const features=[...document.getElementById('feat-list').querySelectorAll('input')].map(i=>i.value.trim()).filter(Boolean);
+  const plan={
+    id:editPlanId!=null?editPlanId:Date.now(),
+    cat:document.getElementById('f-cat').value,
+    name,desc:document.getElementById('f-desc').value.trim(),
+    price,unit:document.getElementById('f-unit').value.trim()||'one-time',
+    featured:document.getElementById('f-featured').checked,
+    features
+  };
+  let plans=getPlans();
+  if(editPlanId!=null){plans=plans.map(p=>p.id==editPlanId?plan:p);}
+  else{plans.push(plan);}
+  savePlans(plans);
+  closeModal();
+  renderAll();
+  showToast(editPlanId?'Plan updated.':'Plan created.','success');
+}
+
+// CAT MODAL
+function openCatModal(id=null){
+  modalType='cat';
+  const cats=getCats();
+  const c=id?cats.find(x=>x.id===id):null;
+  document.getElementById('modal-title-text').textContent=c?'Rename Category':'New Category';
+  document.getElementById('modal-body-content').innerHTML=`
+    <div class="field"><label>Category Name</label><input id="f-catname" value="${c?c.name:''}" placeholder="e.g. Game Servers"></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-accent" onclick="saveCat('${id||''}')">Save</button>
+    </div>`;
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function editCat(id){openCatModal(id);}
+function saveCat(id){
+  const name=document.getElementById('f-catname').value.trim();
+  if(!name){showToast('Category name required.','danger');return;}
+  let cats=getCats();
+  if(id){cats=cats.map(c=>c.id===id?{...c,name}:c);}
+  else{
+    const newId=name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+    cats.push({id:newId+'_'+Date.now(),name});
+    activeCat=cats[cats.length-1].id;
+  }
+  saveCats(cats);
+  closeModal();
+  renderAll();
+  showToast(id?'Category renamed.':'Category created.','success');
+}
+function deleteCat(id){
+  showConfirm('Delete Category?','All plans in this category will also be deleted. This cannot be undone.',()=>{
+    let cats=getCats().filter(c=>c.id!==id);
+    let plans=getPlans().filter(p=>p.cat!==id);
+    saveCats(cats);savePlans(plans);
+    activeCat=cats[0]?.id||null;
+    renderAll();
+    showToast('Category deleted.','success');
+  });
+}
+
+// DELETE PLAN
+function confirmDeletePlan(id,name){
+  showConfirm('Delete Plan?',`"${name}" will be permanently removed.`,()=>{
+    savePlans(getPlans().filter(p=>p.id!=id));
+    renderAll();
+    showToast('Plan deleted.','success');
+  });
+}
+
+// MODAL/CONFIRM HELPERS
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open');}
+let confirmCb=null;
+function showConfirm(title,sub,cb){
+  document.getElementById('confirm-title').textContent=title;
+  document.getElementById('confirm-sub').textContent=sub;
+  confirmCb=cb;
+  document.getElementById('confirm-overlay').classList.add('open');
+  document.getElementById('confirm-ok').onclick=()=>{cb();closeConfirm();};
+}
+function closeConfirm(){document.getElementById('confirm-overlay').classList.remove('open');}
+
+// TOAST
+let toastTimer;
+function showToast(msg,type='success'){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='show t-'+type;
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>{t.className='';},2800);
+}
+
+// Close modal on overlay click
+document.getElementById('modal-overlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+document.getElementById('confirm-overlay').addEventListener('click',function(e){if(e.target===this)closeConfirm();});
+</script>
+</body>
+</html>
