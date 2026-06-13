@@ -1,4 +1,4 @@
-2025-09-30 15:02:07,426 - HVMPanel - INFO - Docker initialized
+2025-09-30 15:02:07,426 - HVMPanel - INFO - Docker initialize
 2025-09-30 15:02:07,471 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on all addresses (0.0.0.0)
  * Running on http://127.0.0.1:3000
@@ -336,13 +336,27 @@ Get:169 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-lazr.restfulcl
 2025-09-30 16:21:40,289 - HVMPanel - INFO - Fetched 139 MB in 24s (5767 kB/s)
 2025-09-30 16:21:40,289 - HVMPanel - INFO - Selecting previously unselected package libpython3.10-minimal:amd64.
 (Reading database ...
-2025-09-30 16:21:40,289 - HVMPanel - INFO - (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%
+2025-09-30 16:21:40,289 - HVMPanel - INFO - (Reading database ... 5%
+(Reading database ... 10%
+(Reading database ... 15%
+(Reading database ... 20%
+(Reading database ... 25%
+(Reading database ... 30%
+(Reading database ... 35%
+(Reading database ... 40%
+(Reading database ... 45%
+(Reading database ... 50%
+(Reading database ... 55%
+(Reading database ... 60%
+(Reading database ... 65%
+(Reading database ... 70%
 2025-09-30 16:21:40,290 - HVMPanel - INFO - (Reading database ... 75%
 2025-09-30 16:21:40,290 - HVMPanel - INFO - (Reading database ... 80%
 2025-09-30 16:21:40,290 - HVMPanel - INFO - (Reading database ... 85%
 2025-09-30 16:21:40,290 - HVMPanel - INFO - (Reading database ... 90%
 2025-09-30 16:21:40,290 - HVMPanel - INFO - (Reading database ... 95%
-2025-09-30 16:21:40,290 - HVMPanel - INFO - (Reading database ... 100%(Reading database ... 4393 files and directories currently installed.)
+2025-09-30 16:21:40,290 - HVMPanel - INFO - (Reading database ... 100%
+(Reading database ... 4393 files and directories currently installed.)
 2025-09-30 16:21:40,290 - HVMPanel - INFO - Preparing to unpack .../libpython3.10-minimal_3.10.12-1~22.04.11_amd64.deb ...
 2025-09-30 16:21:40,290 - HVMPanel - INFO - Unpacking libpython3.10-minimal:amd64 (3.10.12-1~22.04.11) ...
 2025-09-30 16:21:40,291 - HVMPanel - INFO - Selecting previously unselected package libexpat1:amd64.
@@ -356,14 +370,27 @@ Get:169 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-lazr.restfulcl
 2025-09-30 16:21:40,291 - HVMPanel - INFO - Setting up python3.10-minimal (3.10.12-1~22.04.11) ...
 2025-09-30 16:21:40,292 - HVMPanel - INFO - Selecting previously unselected package python3-minimal.
 (Reading database ...
-2025-09-30 16:21:40,292 - HVMPanel - INFO - (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%
+2025-09-30 16:21:40,292 - HVMPanel - INFO - (Reading database ... 5%
+(Reading database ... 10%
+(Reading database ... 15%
+(Reading database ... 20%
+(Reading database ... 25%
+(Reading database ... 30%
+(Reading database ... 35%
+(Reading database ... 40%
+(Reading database ... 45%
+(Reading database ... 50%
+(Reading database ... 55%
+(Reading database ... 60%
+(Reading database ... 65%
 2025-09-30 16:21:40,292 - HVMPanel - INFO - (Reading database ... 70%
 2025-09-30 16:21:40,292 - HVMPanel - INFO - (Reading database ... 75%
 2025-09-30 16:21:40,292 - HVMPanel - INFO - (Reading database ... 80%
 2025-09-30 16:21:40,292 - HVMPanel - INFO - (Reading database ... 85%
 2025-09-30 16:21:40,292 - HVMPanel - INFO - (Reading database ... 90%
 2025-09-30 16:21:40,293 - HVMPanel - INFO - (Reading database ... 95%
-2025-09-30 16:21:40,293 - HVMPanel - INFO - (Reading database ... 100%(Reading database ... 4697 files and directories currently installed.)
+2025-09-30 16:21:40,293 - HVMPanel - INFO - (Reading database ... 100%
+(Reading database ... 4697 files and directories currently installed.)
 2025-09-30 16:21:40,293 - HVMPanel - INFO - Preparing to unpack .../0-python3-minimal_3.10.6-1~22.04.1_amd64.deb ...
 2025-09-30 16:21:40,293 - HVMPanel - INFO - Unpacking python3-minimal (3.10.6-1~22.04.1) ...
 2025-09-30 16:21:40,293 - HVMPanel - INFO - Selecting previously unselected package media-types.
@@ -393,14 +420,27 @@ Get:169 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-lazr.restfulcl
 2025-09-30 16:21:40,295 - HVMPanel - INFO - Setting up python3-minimal (3.10.6-1~22.04.1) ...
 2025-09-30 16:21:40,295 - HVMPanel - INFO - Selecting previously unselected package python3.
 (Reading database ...
-2025-09-30 16:21:40,295 - HVMPanel - INFO - (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%
+2025-09-30 16:21:40,295 - HVMPanel - INFO - (Reading database ... 5%
+(Reading database ... 10%
+(Reading database ... 15%
+(Reading database ... 20%
+(Reading database ... 25%
+(Reading database ... 30%
+(Reading database ... 35%
+(Reading database ... 40%
+(Reading database ... 45%
+(Reading database ... 50%
+(Reading database ... 55%
+(Reading database ... 60%
+(Reading database ... 65%
 2025-09-30 16:21:40,296 - HVMPanel - INFO - (Reading database ... 70%
 2025-09-30 16:21:40,296 - HVMPanel - INFO - (Reading database ... 75%
 2025-09-30 16:21:40,296 - HVMPanel - INFO - (Reading database ... 80%
 2025-09-30 16:21:40,296 - HVMPanel - INFO - (Reading database ... 85%
 2025-09-30 16:21:40,296 - HVMPanel - INFO - (Reading database ... 90%
 2025-09-30 16:21:40,296 - HVMPanel - INFO - (Reading database ... 95%
-2025-09-30 16:21:40,296 - HVMPanel - INFO - (Reading database ... 100%(Reading database ... 5127 files and directories currently installed.)
+2025-09-30 16:21:40,296 - HVMPanel - INFO - (Reading database ... 100%
+(Reading database ... 5127 files and directories currently installed.)
 2025-09-30 16:21:40,297 - HVMPanel - INFO - Preparing to unpack .../0-python3_3.10.6-1~22.04.1_amd64.deb ...
 2025-09-30 16:21:40,297 - HVMPanel - INFO - Unpacking python3 (3.10.6-1~22.04.1) ...
 2025-09-30 16:21:40,297 - HVMPanel - INFO - Selecting previously unselected package libapparmor1:amd64.
@@ -450,14 +490,27 @@ Created symlink /etc/systemd/system/multi-user.target.wants/systemd-resolved.ser
 2025-09-30 16:21:40,302 - HVMPanel - INFO - Initializing machine ID from random generator.
 2025-09-30 16:21:40,302 - HVMPanel - INFO - Selecting previously unselected package systemd-sysv.
 (Reading database ...
-2025-09-30 16:21:40,303 - HVMPanel - INFO - (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%
+2025-09-30 16:21:40,303 - HVMPanel - INFO - (Reading database ... 5%
+(Reading database ... 10%
+(Reading database ... 15%
+(Reading database ... 20%
+(Reading database ... 25%
+(Reading database ... 30%
+(Reading database ... 35%
+(Reading database ... 40%
+(Reading database ... 45%
+(Reading database ... 50%
+(Reading database ... 55%
+(Reading database ... 60%
+(Reading database ... 65%
 2025-09-30 16:21:40,303 - HVMPanel - INFO - (Reading database ... 70%
 2025-09-30 16:21:40,303 - HVMPanel - INFO - (Reading database ... 75%
 2025-09-30 16:21:40,303 - HVMPanel - INFO - (Reading database ... 80%
 2025-09-30 16:21:40,303 - HVMPanel - INFO - (Reading database ... 85%
 2025-09-30 16:21:40,303 - HVMPanel - INFO - (Reading database ... 90%
 2025-09-30 16:21:40,303 - HVMPanel - INFO - (Reading database ... 95%
-2025-09-30 16:21:40,303 - HVMPanel - INFO - (Reading database ... 100%(Reading database ... 5966 files and directories currently installed.)
+2025-09-30 16:21:40,303 - HVMPanel - INFO - (Reading database ... 100%
+(Reading database ... 5966 files and directories currently installed.)
 2025-09-30 16:21:40,303 - HVMPanel - INFO - Preparing to unpack .../000-systemd-sysv_249.11-0ubuntu3.16_amd64.deb ...
 2025-09-30 16:21:40,303 - HVMPanel - INFO - Unpacking systemd-sysv (249.11-0ubuntu3.16) ...
 2025-09-30 16:21:40,304 - HVMPanel - INFO - Selecting previously unselected package libmd0:amd64.
@@ -1823,27 +1876,53 @@ Get:382 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libsixel1 amd64 1.
 [0m
 2025-09-30 16:22:12,827 - HVMPanel - INFO - Fetched 328 MB in 43s (7603 kB/s)
 2025-09-30 16:22:12,827 - HVMPanel - INFO - (Reading database ...
-2025-09-30 16:22:12,827 - HVMPanel - INFO - (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%
-2025-09-30 16:22:12,827 - HVMPanel - INFO - (Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%
-2025-09-30 16:22:12,827 - HVMPanel - INFO - (Reading database ... 70%(Reading database ... 75%
+2025-09-30 16:22:12,827 - HVMPanel - INFO - (Reading database ... 5%
+(Reading database ... 10%
+(Reading database ... 15%
+(Reading database ... 20%
+(Reading database ... 25%
+(Reading database ... 30%
+2025-09-30 16:22:12,827 - HVMPanel - INFO - (Reading database ... 35%
+(Reading database ... 40%
+(Reading database ... 45%
+(Reading database ... 50%
+(Reading database ... 55%
+(Reading database ... 60%
+(Reading database ... 65%
+2025-09-30 16:22:12,827 - HVMPanel - INFO - (Reading database ... 70%
+(Reading database ... 75%
 2025-09-30 16:22:12,827 - HVMPanel - INFO - (Reading database ... 80%
 2025-09-30 16:22:12,827 - HVMPanel - INFO - (Reading database ... 85%
 2025-09-30 16:22:12,827 - HVMPanel - INFO - (Reading database ... 90%
 2025-09-30 16:22:12,827 - HVMPanel - INFO - (Reading database ... 95%
-2025-09-30 16:22:12,827 - HVMPanel - INFO - (Reading database ... 100%(Reading database ... 17114 files and directories currently installed.)
+2025-09-30 16:22:12,827 - HVMPanel - INFO - (Reading database ... 100%
+(Reading database ... 17114 files and directories currently installed.)
 2025-09-30 16:22:12,827 - HVMPanel - INFO - Preparing to unpack .../libc6_2.35-0ubuntu3.11_amd64.deb ...
 2025-09-30 16:22:12,828 - HVMPanel - INFO - Unpacking libc6:amd64 (2.35-0ubuntu3.11) over (2.35-0ubuntu3.10) ...
 2025-09-30 16:22:12,828 - HVMPanel - INFO - Setting up libc6:amd64 (2.35-0ubuntu3.11) ...
 2025-09-30 16:22:12,828 - HVMPanel - INFO - Selecting previously unselected package liblocale-gettext-perl.
 (Reading database ...
-2025-09-30 16:22:12,828 - HVMPanel - INFO - (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%
+2025-09-30 16:22:12,828 - HVMPanel - INFO - (Reading database ... 5%
+(Reading database ... 10%
+(Reading database ... 15%
+(Reading database ... 20%
+(Reading database ... 25%
+(Reading database ... 30%
+(Reading database ... 35%
+(Reading database ... 40%
+(Reading database ... 45%
+(Reading database ... 50%
+(Reading database ... 55%
+(Reading database ... 60%
+(Reading database ... 65%
 2025-09-30 16:22:12,828 - HVMPanel - INFO - (Reading database ... 70%
 2025-09-30 16:22:12,828 - HVMPanel - INFO - (Reading database ... 75%
 2025-09-30 16:22:12,828 - HVMPanel - INFO - (Reading database ... 80%
 2025-09-30 16:22:12,829 - HVMPanel - INFO - (Reading database ... 85%
 2025-09-30 16:22:12,829 - HVMPanel - INFO - (Reading database ... 90%
 2025-09-30 16:22:12,829 - HVMPanel - INFO - (Reading database ... 95%
-2025-09-30 16:22:12,829 - HVMPanel - INFO - (Reading database ... 100%(Reading database ... 17114 files and directories currently installed.)
+2025-09-30 16:22:12,829 - HVMPanel - INFO - (Reading database ... 100%
+(Reading database ... 17114 files and directories currently installed.)
 2025-09-30 16:22:12,829 - HVMPanel - INFO - Preparing to unpack .../000-liblocale-gettext-perl_1.07-4build3_amd64.deb ...
 2025-09-30 16:22:12,829 - HVMPanel - INFO - Unpacking liblocale-gettext-perl (1.07-4build3) ...
 2025-09-30 16:22:12,829 - HVMPanel - INFO - Selecting previously unselected package libapr1:amd64.
